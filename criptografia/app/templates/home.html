@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Inicio</h2>
+<ul>
+    <li><a href="{{ url_for('cifra_flujo.index') }}">Sistemas de Cifra en Flujo</a> - <a href="{{ url_for('cifra_flujo.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('simetrico_bloque.index') }}">Cifrado Simétrico en Bloque</a> - <a href="{{ url_for('simetrico_bloque.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('mochila.index') }}">Cifrado Asimétrico con Mochilas</a> - <a href="{{ url_for('mochila.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('exponencial.index') }}">Cifrado Asimétrico Exponencial</a> - <a href="{{ url_for('exponencial.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('hash.index') }}">Funciones Hash en Criptografía</a> - <a href="{{ url_for('hash.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('firma.index') }}">Autenticación y Firma Digital</a> - <a href="{{ url_for('firma.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('certificados.index') }}">Certificados Digitales</a> - <a href="{{ url_for('certificados.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('cuantica.index') }}">Criptografía Cuántica</a> - <a href="{{ url_for('cuantica.demostracion') }}">Demostración</a></li>
+    <li><a href="{{ url_for('blockchain.index') }}">Blockchain</a> - <a href="{{ url_for('blockchain.demostracion') }}">Demostración</a></li>
+</ul>
+{% endblock %}
