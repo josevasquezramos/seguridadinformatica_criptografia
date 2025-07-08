@@ -1,6 +1,88 @@
-{% extends 'layout.html' %}
+{% extends 'simetrico_bloque/base.html' %}
 
-{% block content %}
-<h2>Demostración - Cifrado Simétrico en Bloque</h2>
-<p>Esta es la página de demostración del algoritmo de Cifrado Simétrico en Bloque.</p>
+{% block title %}Demostración de Cifrado en Bloque{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/simetrico_bloque.js') }}"></script>
+{% endblock %}
+
+{% block simetrico_bloque_content %}
+<article class="demo-section">
+    <h2>Demostración de Cifrado AES</h2>
+    <p class="subtitle">Experimenta con el cifrado por bloques (AES-256 en modo CBC)</p>
+
+    <form method="POST" class="cifrado-form">
+        <div class="form-group">
+            <label for="texto">Texto:</label>
+            <textarea id="texto" name="texto" rows="5"
+                placeholder="Ingresa el texto a cifrar/descifrar">{{ texto_original }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="clave">Clave (32 caracteres para AES-256):</label>
+            <div class="key-input-container">
+                <input type="text" id="clave" name="clave" value="{{ clave }}"
+                    placeholder="Ingresa la clave de cifrado (32 caracteres)" class="key-input" maxlength="32">
+                <span class="key-char-count">0/32</span>
+            </div>
+            <div class="hint">La clave debe tener exactamente 32 caracteres (256 bits)</div>
+        </div>
+
+        <div class="form-group radio-group">
+            <label>Modo:</label>
+            <div class="radio-options">
+                <label>
+                    <input type="radio" name="modo" value="cifrar" {% if modo !='descifrar' %}checked{% endif %}>
+                    <span>Cifrar</span>
+                </label>
+                <label>
+                    <input type="radio" name="modo" value="descifrar" {% if modo=='descifrar' %}checked{% endif %}>
+                    <span>Descifrar</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Procesar</button>
+            <button type="button" id="generar-clave" class="btn btn-tertiary">Generar Clave</button>
+        </div>
+    </form>
+
+    {% if resultado %}
+    <div class="result-section">
+        <h3>Resultado:</h3>
+        <div class="result-box">
+            {% if modo == 'cifrar' %}
+            <p class="base64-result">{{ resultado }}</p>
+            <p class="result-label">Texto cifrado (Base64 - incluye IV)</p>
+            {% else %}
+            <p class="text-result">{{ resultado }}</p>
+            <p class="result-label">Texto descifrado</p>
+            {% endif %}
+        </div>
+
+        <div class="result-actions">
+            <button id="copiar-resultado" class="btn btn-small">
+                <i class="icon-copy"></i> Copiar
+            </button>
+            {% if modo == 'cifrar' %}
+            <button id="descargar-resultado" class="btn btn-small">
+                <i class="icon-download"></i> Descargar
+            </button>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="info-section">
+        <h3>Instrucciones:</h3>
+        <ul>
+            <li>Para cifrar: Ingresa texto plano y una clave de exactamente 32 caracteres</li>
+            <li>Para descifrar: Ingresa texto en Base64 (incluye IV) y la misma clave usada para cifrar</li>
+            <li>El sistema usa AES-256-CBC con padding PKCS7</li>
+            <li>El IV (Vector de Inicialización) se genera automáticamente y se incluye en el resultado cifrado</li>
+            <li>Guarda la clave de forma segura, es esencial para el descifrado</li>
+        </ul>
+    </div>
+</article>
 {% endblock %}

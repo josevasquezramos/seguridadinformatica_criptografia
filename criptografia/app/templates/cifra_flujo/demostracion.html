@@ -1,6 +1,76 @@
-{% extends 'layout.html' %}
+{% extends 'cifra_flujo/base.html' %}
 
-{% block content %}
-<h2>Demostración - Sistemas de Cifra en Flujo</h2>
-<p>Esta es la página de demostración del algoritmo de Sistemas de Cifra en Flujo.</p>
+{% block title %}Demostración de Cifrado en Flujo{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/cifra_flujo.js') }}"></script>
+{% endblock %}
+
+{% block cifra_flujo_content %}
+    <article class="demo-section">
+        <h2>Demostración de Cifrado en Flujo</h2>
+        <p class="subtitle">Experimenta con el cifrado XOR interactivo</p>
+
+        <form method="POST" class="cifrado-form">
+            <div class="form-group">
+                <label for="texto">Texto:</label>
+                <textarea id="texto" name="texto" rows="5" placeholder="Ingresa el texto a cifrar/descifrar">{{ texto_original }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="clave">Clave:</label>
+                <input type="text" id="clave" name="clave" value="{{ clave }}" placeholder="Ingresa la clave de cifrado">
+            </div>
+
+            <div class="form-group radio-group">
+                <label>Modo:</label>
+                <div class="radio-options">
+                    <label>
+                        <input type="radio" name="modo" value="cifrar" {% if modo != 'descifrar' %}checked{% endif %}>
+                        <span>Cifrar</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="modo" value="descifrar" {% if modo == 'descifrar' %}checked{% endif %}>
+                        <span>Descifrar</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Procesar</button>
+                <button type="button" id="limpiar" class="btn btn-secondary">Limpiar</button>
+            </div>
+        </form>
+
+        {% if resultado %}
+        <div class="result-section">
+            <h3>Resultado:</h3>
+            <div class="result-box">
+                {% if modo == 'cifrar' %}
+                    <p class="hex-result">{{ resultado }}</p>
+                    <p class="result-label">Texto cifrado (hexadecimal)</p>
+                {% else %}
+                    <p class="text-result">{{ resultado }}</p>
+                    <p class="result-label">Texto descifrado</p>
+                {% endif %}
+            </div>
+            
+            <div class="result-actions">
+                <button id="copiar-resultado" class="btn btn-small">
+                    <i class="icon-copy"></i> Copiar
+                </button>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="info-section">
+            <h3>Instrucciones:</h3>
+            <ul>
+                <li>Para cifrar: Ingresa texto plano y una clave, selecciona "Cifrar"</li>
+                <li>Para descifrar: Ingresa texto en hexadecimal y la misma clave usada para cifrar, selecciona "Descifrar"</li>
+                <li>La misma clave debe usarse para cifrar y descifrar</li>
+                <li>No reutilices claves para diferentes mensajes</li>
+            </ul>
+        </div>
+    </article>
 {% endblock %}

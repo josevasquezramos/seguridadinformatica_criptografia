@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simetrico_bloque.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="simetrico-bloque-container">
+        <aside class="sidebar">
+            <h3>Cifrado en Bloque</h3>
+            <ul class="menu">
+                <li><a href="{{ url_for('simetrico_bloque.index') }}" class="{% if request.endpoint == 'simetrico_bloque.index' %}active{% endif %}">Introducción</a></li>
+                <li><a href="{{ url_for('simetrico_bloque.demostracion') }}" class="{% if request.endpoint == 'simetrico_bloque.demostracion' %}active{% endif %}">Demostración</a></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            {% block simetrico_bloque_content %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

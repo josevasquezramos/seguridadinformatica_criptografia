@@ -1,7 +1,40 @@
-{% extends 'layout.html' %}
+{% extends 'cifra_flujo/base.html' %}
 
-{% block content %}
-<h2>Sistemas de Cifra en Flujo</h2>
-<p>Bienvenido a la sección de Sistemas de Cifra en Flujo.</p>
-<p>Teoría y conceptos.</p>
+{% block title %}Cifrado en Flujo{% endblock %}
+
+{% block cifra_flujo_content %}
+    <article class="intro-section">
+        <h2>Cifrado en Flujo (Stream Cipher)</h2>
+        
+        <div class="info-card">
+            <h3>¿Qué es el cifrado en flujo?</h3>
+            <p>Un cifrado en flujo es un método de cifrado simétrico donde los bits de texto plano se combinan con un flujo de bits de clave cifrada (usualmente mediante la operación XOR).</p>
+        </div>
+
+        <div class="info-card">
+            <h3>Características principales</h3>
+            <ul>
+                <li>Opera bit a bit o byte a byte</li>
+                <li>Generalmente más rápido que el cifrado por bloques</li>
+                <li>Requiere una clave tan larga como el mensaje (en su forma más simple)</li>
+                <li>Vulnerable si se reutiliza la clave</li>
+            </ul>
+        </div>
+
+        <div class="action-card">
+            <h3>Prueba el cifrado en flujo</h3>
+            <p>Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado.</p>
+            <br>
+            <a href="{{ url_for('cifra_flujo.demostracion') }}" class="btn btn-primary">Ir a demostración</a>
+        </div>
+
+        <div class="algorithm-card">
+            <h3>Algoritmo XOR</h3>
+            <p>Nuestra implementación utiliza el operador XOR (OR exclusivo) para combinar el texto con la clave:</p>
+            <br>
+            <pre>texto_cifrado = texto_plano XOR clave</pre>
+            <br>
+            <pre>texto_plano = texto_cifrado XOR clave</pre>
+        </div>
+    </article>
 {% endblock %}
