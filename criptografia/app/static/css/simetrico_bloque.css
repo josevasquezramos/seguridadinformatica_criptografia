@@ -1,0 +1,322 @@
+/* Estilos base reutilizados del sistema de cifrado en flujo */
+.simetrico-bloque-container {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.simetrico-bloque-container .sidebar {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    flex: 0 0 250px;
+}
+
+.simetrico-bloque-container .sidebar h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* Estilos para la página de demostración */
+.demo-section {
+    flex: 1;
+}
+
+.demo-section h2 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.demo-section .subtitle {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+/* Formulario */
+.cifrado-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input[type="password"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.3rem;
+}
+
+.radio-group {
+    margin-bottom: 1.5rem;
+}
+
+.radio-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.radio-options {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.radio-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Resultados */
+.result-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.result-section h3 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.result-box {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hex-result {
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.text-result {
+    white-space: pre-wrap;
+}
+
+.result-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.result-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+/* Info section */
+.info-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-section h3 {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.info-section ul {
+    padding-left: 1.5rem;
+}
+
+.info-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: var(--light-color);
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background-color: #d5dbdb;
+}
+
+.btn-small {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+/* Estilos para la página de índice */
+.intro-section h2 {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.info-card, .action-card, .algorithm-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.info-card h3, .action-card h3, .algorithm-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.action-card {
+    border-left: 4px solid var(--success-color);
+}
+
+.algorithm-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.algorithm-card pre {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+/* Añadir estas reglas específicas para AES */
+.base64-result {
+    font-family: monospace;
+    word-break: break-all;
+    white-space: pre-wrap;
+    background-color: #f8f9fa;
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-tertiary {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+}
+
+.btn-tertiary:hover {
+    background-color: #27ae60;
+}
+
+/* Especificar el tipo de input password */
+input[type="password"] {
+    font-family: monospace;
+    letter-spacing: 0.1em;
+}
+
+/* Contenedor del campo de clave */
+.key-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo del input de clave */
+.key-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: monospace;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+    padding-right: 60px; /* Espacio para el contador */
+    background-color: #f8f9fa;
+    color: var(--text-color);
+}
+
+/* Contador de caracteres */
+.key-char-count {
+    position: absolute;
+    right: 10px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* Estilo cuando el campo tiene foco */
+.key-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .key-input {
+        letter-spacing: 0.1em;
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .simetrico-bloque-container {
+        flex-direction: column;
+    }
+    
+    .simetrico-bloque-container .sidebar {
+        flex: 1;
+    }
+    
+    .radio-options {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

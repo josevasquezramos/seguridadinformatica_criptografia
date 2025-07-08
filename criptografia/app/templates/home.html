@@ -1,16 +1,136 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h2>Inicio</h2>
-<ul>
-    <li><a href="{{ url_for('cifra_flujo.index') }}">Sistemas de Cifra en Flujo</a> - <a href="{{ url_for('cifra_flujo.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('simetrico_bloque.index') }}">Cifrado Simétrico en Bloque</a> - <a href="{{ url_for('simetrico_bloque.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('mochila.index') }}">Cifrado Asimétrico con Mochilas</a> - <a href="{{ url_for('mochila.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('exponencial.index') }}">Cifrado Asimétrico Exponencial</a> - <a href="{{ url_for('exponencial.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('hash.index') }}">Funciones Hash en Criptografía</a> - <a href="{{ url_for('hash.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('firma.index') }}">Autenticación y Firma Digital</a> - <a href="{{ url_for('firma.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('certificados.index') }}">Certificados Digitales</a> - <a href="{{ url_for('certificados.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('cuantica.index') }}">Criptografía Cuántica</a> - <a href="{{ url_for('cuantica.demostracion') }}">Demostración</a></li>
-    <li><a href="{{ url_for('blockchain.index') }}">Blockchain</a> - <a href="{{ url_for('blockchain.demostracion') }}">Demostración</a></li>
-</ul>
+<div class="home-container">
+    <h2 class="home-title">Sistemas de Criptografía</h2>
+    <p class="home-subtitle">Seleccione un módulo para explorar</p>
+
+    <div class="cards-grid">
+        <!-- Cifrado en Flujo -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Sistemas de Cifra en Flujo</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Algoritmos de cifrado que operan bit a bit con flujos de clave.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('cifra_flujo.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('cifra_flujo.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Cifrado Simétrico en Bloque -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Cifrado Simétrico en Bloque</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Algoritmos como AES que cifran bloques de datos de tamaño fijo.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('simetrico_bloque.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('simetrico_bloque.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Cifrado Asimétrico con Mochilas -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Cifrado Asimétrico con Mochilas</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Sistema criptográfico basado en el problema de la mochila.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('mochila.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('mochila.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Cifrado Asimétrico Exponencial -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Cifrado Asimétrico Exponencial</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Algoritmos basados en problemas de logaritmos discretos.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('exponencial.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('exponencial.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Funciones Hash -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Funciones Hash en Criptografía</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Funciones unidireccionales para integridad de datos y firma digital.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('hash.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('hash.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Firma Digital -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Autenticación y Firma Digital</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Técnicas para verificar autenticidad e integridad de documentos.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('firma.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('firma.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Certificados Digitales -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Certificados Digitales</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Infraestructura de clave pública y autoridades certificadoras.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('certificados.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('certificados.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Criptografía Cuántica -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Criptografía Cuántica</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Técnicas basadas en principios de la mecánica cuántica.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('cuantica.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('cuantica.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+
+        <!-- Blockchain -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Blockchain</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-description">Tecnología de registro distribuido y criptomonedas.</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('blockchain.index') }}" class="btn btn-card">Teoría</a>
+                <a href="{{ url_for('blockchain.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

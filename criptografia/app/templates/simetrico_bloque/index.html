@@ -1,7 +1,43 @@
-{% extends 'layout.html' %}
+{% extends 'simetrico_bloque/base.html' %}
 
-{% block content %}
-<h2>Cifrado Simétrico en Bloque</h2>
-<p>Bienvenido a la sección de Cifrado Simétrico en Bloque.</p>
-<p>Teoría y conceptos.</p>
+{% block title %}Cifrado Simétrico en Bloque{% endblock %}
+
+{% block simetrico_bloque_content %}
+<article class="intro-section">
+    <h2>Cifrado Simétrico en Bloque (AES)</h2>
+
+    <div class="info-card">
+        <h3>¿Qué es el cifrado en bloque?</h3>
+        <p>Un cifrado en bloque es un algoritmo de cifrado simétrico que opera sobre grupos de bits de longitud fija
+            (bloques). AES (Advanced Encryption Standard) es el estándar actual más utilizado.</p>
+    </div>
+
+    <div class="info-card">
+        <h3>Características principales</h3>
+        <ul>
+            <li>Opera sobre bloques de tamaño fijo (128 bits para AES)</li>
+            <li>Claves de 128, 192 o 256 bits</li>
+            <li>Más seguro que los cifrados en flujo básicos</li>
+            <li>Implementa rondas de transformación (10, 12 o 14 según tamaño de clave)</li>
+        </ul>
+    </div>
+
+    <div class="action-card">
+        <h3>Prueba el cifrado AES</h3>
+        <p>Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado.</p>
+        <br>
+        <a href="{{ url_for('simetrico_bloque.demostracion') }}" class="btn btn-primary">Ir a demostración</a>
+    </div>
+
+    <div class="algorithm-card">
+        <h3>Algoritmo AES</h3>
+        <p>Nuestra implementación utiliza AES en modo CBC (Cipher Block Chaining):</p>
+        <br>
+        <pre>Proceso de cifrado:
+1. Padding del texto para completar bloques
+2. Generación de IV (Vector de Inicialización)
+3. Aplicación de transformaciones por bloques
+4. Concatenación del IV con el texto cifrado</pre>
+    </div>
+</article>
 {% endblock %}
