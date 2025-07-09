@@ -1,6 +1,58 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Demostración - Cifrado Asimétrico con Mochilas</h2>
-<p>Esta es la página de demostración del algoritmo de Cifrado Asimétrico con Mochilas.</p>
+<h2>Demostración - Cifrado de Mochilas</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="accion" class="form-label">Selecciona una acción:</label>
+        <select id="accion" name="accion" class="form-select" onchange="mostrarCampos()">
+            <option value="cifrar">Cifrar</option>
+            <option value="descifrar">Descifrar</option>
+        </select>
+    </div>
+
+    <!-- Campo para cifrar -->
+    <div class="mb-3" id="campo-cifrar">
+        <label for="mensaje" class="form-label">Mensaje a cifrar:</label>
+        <input type="text" name="mensaje" id="mensaje" class="form-control">
+    </div>
+
+    <!-- Campo para descifrar -->
+    <div class="mb-3" id="campo-descifrar" style="display: none;">
+        <label for="cifrado" class="form-label">Valores cifrados (separados por coma):</label>
+        <input type="text" name="cifrado" id="cifrado" class="form-control" placeholder="Ej: 502,312,198">
+    </div>
+
+    <button type="submit" class="btn btn-success">Ejecutar</button>
+</form>
+
+<script>
+    function mostrarCampos() {
+        var accion = document.getElementById("accion").value;
+        document.getElementById("campo-cifrar").style.display = (accion === "cifrar") ? "block" : "none";
+        document.getElementById("campo-descifrar").style.display = (accion === "descifrar") ? "block" : "none";
+    }
+</script>
+
+{% if resultado %}
+<hr>
+{% if resultado.error %}
+    <div class="alert alert-danger">{{ resultado.error }}</div>
+{% elif resultado.modo == 'cifrado' %}
+    <h4>Resultado del Cifrado</h4>
+    <ul>
+        <li><strong>Mensaje original:</strong> {{ resultado.mensaje_original }}</li>
+        <li><strong>Binario:</strong> {{ resultado.mensaje_binario }}</li>
+        <li><strong>Cifrado:</strong> {{ resultado.cifrado }}</li>
+        <li><strong>Clave pública:</strong> {{ resultado.mochila_publica }}</li>
+    </ul>
+{% elif resultado.modo == 'descifrado' %}
+    <h4>Resultado del Descifrado</h4>
+    <ul>
+        <li><strong>Cifrado recibido:</strong> {{ resultado.cifrado }}</li>
+        <li><strong>Binarios:</strong> {{ resultado.descifrado_bin }}</li>
+        <li><strong>Mensaje descifrado:</strong> {{ resultado.mensaje_descifrado }}</li>
+    </ul>
+{% endif %}
+{% endif %}
 {% endblock %}

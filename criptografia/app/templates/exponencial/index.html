@@ -1,7 +1,56 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Cifrado Asimétrico Exponencial</h2>
-<p>Bienvenido a la sección de Cifrado Asimétrico Exponencial.</p>
-<p>Teoría y conceptos.</p>
+<h2>🔐 Cifrado Asimétrico Exponencial – Algoritmo de Diffie-Hellman</h2>
+
+<p>El <strong>Cifrado Exponencial</strong> es la base de muchos algoritmos de criptografía asimétrica. El más representativo es el <strong>intercambio de claves Diffie-Hellman</strong>, que permite a dos usuarios generar una <u>clave secreta compartida</u> en un canal inseguro, sin necesidad de transmitir dicha clave.</p>
+
+<hr>
+
+<h4>📘 Fundamento Matemático</h4>
+<ul>
+  <li>Basado en la operación de <strong>exponenciación modular</strong>: <code>g<sup>a</sup> mod p</code></li>
+  <li>Su seguridad radica en la dificultad del <strong>Problema del Logaritmo Discreto</strong>:
+    <br><code>conocer g, p, g<sup>a</sup> mod p → encontrar a</code> es computacionalmente muy difícil.</li>
+</ul>
+
+<hr>
+
+<h4>⚙️ Funcionamiento del protocolo Diffie-Hellman</h4>
+<ol>
+  <li>Se acuerdan públicamente dos números: un <strong>primo</strong> <code>p</code> y un <strong>generador</strong> <code>g</code>.</li>
+  <li>Cada parte elige su clave privada secreta: <code>a</code> (Alicia) y <code>b</code> (Bob).</li>
+  <li>Cada uno calcula su clave pública:<br>
+    <code>A = g<sup>a</sup> mod p</code><br>
+    <code>B = g<sup>b</sup> mod p</code></li>
+  <li>Se intercambian A y B.</li>
+  <li>Cada parte calcula la clave compartida:<br>
+    <code>K = B<sup>a</sup> mod p = A<sup>b</sup> mod p</code></li>
+</ol>
+
+<div class="alert alert-info">
+  📌 <strong>Ambas partes obtienen la misma clave secreta</strong>, sin que esta se transmita en ningún momento.
+</div>
+
+<hr>
+
+<h4>🔐 Aplicaciones reales</h4>
+<ul>
+  <li>Protocolo TLS (seguridad en HTTPS)</li>
+  <li>VPNs (como OpenVPN)</li>
+  <li>SSH (intercambio de claves)</li>
+  <li>Establecimiento de sesión segura en múltiples sistemas</li>
+</ul>
+
+<hr>
+
+<h4>🔎 Ejemplo didáctico</h4>
+<div class="card p-3 bg-light">
+  <p><strong>Datos públicos:</strong> <code>p = 23</code>, <code>g = 5</code></p>
+  <p><strong>Alice:</strong> <code>a = 6</code> → <code>A = 5⁶ mod 23 = 8</code></p>
+  <p><strong>Bob:</strong> <code>b = 15</code> → <code>B = 5¹⁵ mod 23 = 2</code></p>
+  <p><strong>Clave compartida:</strong> <code>K = 2⁶ mod 23 = 13 = 8¹⁵ mod 23</code></p>
+</div>
+<div class="text-center">
+  <a href="{{ url_for('exponencial.demostracion') }}" class="btn btn-primary btn-lg">Ir a demostracion</a>
+</div>
 {% endblock %}

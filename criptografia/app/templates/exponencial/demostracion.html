@@ -1,6 +1,76 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Demostración - Cifrado Asimétrico Exponencial</h2>
-<p>Esta es la página de demostración del algoritmo de Cifrado Asimétrico Exponencial.</p>
+<h2>Demostración - Cifrado Asimétrico Exponencial (Diffie-Hellman + AES)</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Modo:</label>
+        <select name="modo" id="modo" class="form-select" onchange="toggleCampos()">
+            <option value="manual">Manual</option>
+            <option value="auto">Automático</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>p (número primo grande):</label>
+        <input type="number" name="p" class="form-control" value="467" required>
+    </div>
+
+    <div class="mb-3">
+        <label>g (generador):</label>
+        <input type="number" name="g" class="form-control" value="2" required>
+    </div>
+
+    <div id="campos-manuales">
+        <div class="mb-3">
+            <label>Clave privada de A (a):</label>
+            <input type="number" name="a" class="form-control" value="5">
+        </div>
+
+        <div class="mb-3">
+            <label>Clave privada de B (b):</label>
+            <input type="number" name="b" class="form-control" value="7">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Mensaje a cifrar (opcional):</label>
+        <input type="text" name="mensaje" class="form-control" placeholder="Escribe un mensaje para cifrar...">
+    </div>
+
+    <button type="submit" class="btn btn-success">Ejecutar</button>
+</form>
+
+<script>
+    function toggleCampos() {
+        const modo = document.getElementById('modo').value;
+        const campos = document.getElementById('campos-manuales');
+        campos.style.display = (modo === 'manual') ? 'block' : 'none';
+    }
+</script>
+
+{% if resultado %}
+<hr>
+{% if resultado.error %}
+    <div class="alert alert-danger">Error: {{ resultado.error }}</div>
+{% else %}
+    <h4>Resultados</h4>
+    <ul>
+        <li><strong>p:</strong> {{ resultado.p }}</li>
+        <li><strong>g:</strong> {{ resultado.g }}</li>
+        <li><strong>Clave privada a (A):</strong> {{ resultado.a }}</li>
+        <li><strong>Clave privada b (B):</strong> {{ resultado.b }}</li>
+        <li><strong>A = g^a mod p:</strong> {{ resultado.A }}</li>
+        <li><strong>B = g^b mod p:</strong> {{ resultado.B }}</li>
+        <li><strong>Clave secreta (SHA-256):</strong> {{ resultado.clave_hex }}</li>
+    </ul>
+
+    {% if resultado.mensaje %}
+    <h5>Mensaje Cifrado</h5>
+    <p><strong>Mensaje original:</strong> {{ resultado.mensaje }}</p>
+    <p><strong>Cifrado (base64):</strong> {{ resultado.mensaje_cifrado }}</p>
+    <p><strong>Descifrado:</strong> {{ resultado.mensaje_descifrado }}</p>
+    {% endif %}
+{% endif %}
+{% endif %}
 {% endblock %}

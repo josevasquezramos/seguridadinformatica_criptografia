@@ -1,7 +1,83 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Funciones Hash en Criptografía</h2>
-<p>Bienvenido a la sección de Funciones Hash en Criptografía.</p>
-<p>Teoría y conceptos.</p>
+<h2>🔐 Funciones Hash en Criptografía</h2>
+
+<p>Las <strong>funciones hash</strong> son algoritmos matemáticos que transforman cualquier entrada en una <strong>huella digital</strong> de longitud fija. Son fundamentales en la seguridad informática por su capacidad para verificar integridad de datos sin revelar el contenido original.</p>
+
+<hr>
+
+<h4>📌 Características de una buena función hash:</h4>
+<ul>
+  <li><strong>Determinista:</strong> siempre genera el mismo hash para la misma entrada.</li>
+  <li><strong>Irreversible:</strong> no se puede recuperar el texto original desde el hash.</li>
+  <li><strong>Eficiente:</strong> computacionalmente rápida.</li>
+  <li><strong>Sensible a cambios:</strong> pequeños cambios en la entrada generan hashes completamente distintos.</li>
+  <li><strong>Sin colisiones:</strong> difícil encontrar dos entradas distintas con el mismo hash.</li>
+</ul>
+
+<hr>
+
+<h4>🔍 ¿Para qué se usan?</h4>
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+      <li>Verificar la integridad de archivos y mensajes.</li>
+      <li>Almacenar contraseñas de forma segura.</li>
+      <li>Firmas digitales y certificados.</li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <ul>
+      <li>Seguridad en Blockchain.</li>
+      <li>Detección de duplicados o datos alterados.</li>
+      <li>Técnicas de autenticación y validación.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<h4>📘 Algoritmos disponibles:</h4>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Algoritmo</th>
+      <th>Longitud</th>
+      <th>Seguridad</th>
+      <th>Uso común</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>MD5</strong></td>
+      <td>128 bits</td>
+      <td>Baja (vulnerable)</td>
+      <td>Checksums y pruebas simples</td>
+    </tr>
+    <tr>
+      <td><strong>SHA-1</strong></td>
+      <td>160 bits</td>
+      <td>Media (obsoleto en seguridad)</td>
+      <td>Certificados antiguos</td>
+    </tr>
+    <tr>
+      <td><strong>SHA-256</strong></td>
+      <td>256 bits</td>
+      <td>Alta</td>
+      <td>Blockchain, SSL/TLS, JWT</td>
+    </tr>
+    <tr>
+      <td><strong>SHA-512</strong></td>
+      <td>512 bits</td>
+      <td>Muy alta</td>
+      <td>Aplicaciones de seguridad avanzada</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<div class="text-center">
+  <a href="{{ url_for('hash.demostracion') }}" class="btn btn-primary btn-lg">Ir a demostración</a>
+</div>
 {% endblock %}

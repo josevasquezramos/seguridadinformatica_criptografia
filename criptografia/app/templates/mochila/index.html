@@ -1,7 +1,51 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Cifrado Asimétrico con Mochilas</h2>
-<p>Bienvenido a la sección de Cifrado Asimétrico con Mochilas.</p>
-<p>Teoría y conceptos.</p>
+<h2>🎒 Cifrado Asimétrico con Mochilas (Merkle-Hellman)</h2>
+
+<p>El <strong>Cifrado de Mochilas</strong> o <strong>Merkle-Hellman Knapsack Cryptosystem</strong> fue uno de los primeros algoritmos de <strong>criptografía asimétrica</strong>, basado en la dificultad de resolver el problema de la <em>mochila o subset sum problem</em>.</p>
+
+<hr>
+
+<h4>🧠 ¿En qué consiste?</h4>
+<p>La idea central es usar una secuencia de números <strong>supercreciente</strong> como clave privada y transformarla en una clave pública mediante operaciones modulares que ocultan la estructura.</p>
+
+<h5>🔑 Claves del sistema:</h5>
+<ul>
+  <li><strong>Clave privada:</strong> Secuencia supercreciente + módulo <code>m</code> y multiplicador <code>w</code></li>
+  <li><strong>Clave pública:</strong> Secuencia derivada de aplicar <code>w</code> y <code>m</code> a la secuencia privada</li>
+</ul>
+
+<hr>
+
+<h4>📌 Etapas del algoritmo</h4>
+<ol>
+  <li>Generar una <strong>secuencia supercreciente</strong> (cada número es mayor que la suma de todos los anteriores).</li>
+  <li>Elegir <code>m</code> mayor que la suma total, y un <code>w</code> tal que sea coprimo con <code>m</code>.</li>
+  <li>Calcular la clave pública: cada elemento es <code>(w × elemento) mod m</code>.</li>
+  <li><strong>Cifrado:</strong> El mensaje se convierte en bits y se multiplica por la clave pública.</li>
+  <li><strong>Descifrado:</strong> Se aplica el inverso modular de <code>w</code> para recuperar la suma y resolver la mochila inversa.</li>
+</ol>
+
+<hr>
+
+<h4>📚 Conceptos clave</h4>
+<ul>
+  <li><strong>Secuencia supercreciente:</strong> Serie donde cada número es mayor que la suma de todos los anteriores.</li>
+  <li><strong>Inverso modular:</strong> Número que cumple <code>(w × w⁻¹) mod m = 1</code>.</li>
+  <li><strong>Problema de la mochila:</strong> Dado un conjunto de pesos y una suma total, encontrar el subconjunto que la genera.</li>
+</ul>
+
+<hr>
+
+<h4>🎯 ¿Por qué ya no se usa?</h4>
+<ul>
+  <li>Existen algoritmos que rompen versiones simples del esquema.</li>
+  <li>Sin embargo, sigue siendo una base educativa importante para entender criptografía basada en problemas NP-completos.</li>
+</ul>
+
+<hr>
+
+<div class="text-center">
+  <a href="{{ url_for('mochila.demostracion') }}" class="btn btn-primary btn-lg">Ir a demostración</a>
+</div>
 {% endblock %}

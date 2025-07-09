@@ -1,6 +1,55 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<h2>Demostración - Funciones Hash en Criptografía</h2>
-<p>Esta es la página de demostración del algoritmo de Funciones Hash en Criptografía.</p>
+<h2>Demostración – Funciones Hash con hashlib (modo educativo)</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="texto" class="form-label">Texto a procesar:</label>
+        <input type="text" name="texto" class="form-control" placeholder="Ejemplo: hola123" required value="{{ resultado.texto if resultado }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="algoritmo" class="form-label">Selecciona el algoritmo:</label>
+        <select name="algoritmo" class="form-select" required>
+            <option value="md5" {% if resultado and resultado.algoritmo == 'MD5' %}selected{% endif %}>MD5</option>
+            <option value="sha1" {% if resultado and resultado.algoritmo == 'SHA1' %}selected{% endif %}>SHA-1</option>
+            <option value="sha256" {% if resultado and resultado.algoritmo == 'SHA256' %}selected{% endif %}>SHA-256</option>
+            <option value="sha512" {% if resultado and resultado.algoritmo == 'SHA512' %}selected{% endif %}>SHA-512</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Calcular Hash</button>
+</form>
+
+{% if resultado %}
+<hr>
+<h4>🔐 Resultado final</h4>
+<p><strong>Texto original:</strong> {{ resultado.texto }}</p>
+<p><strong>Algoritmo:</strong> {{ resultado.algoritmo }}</p>
+<p><strong>Hash final:</strong></p>
+<pre class="bg-light p-2">{{ resultado.hash }}</pre>
+
+<h5 class="mt-4">🧠 Explicación del algoritmo:</h5>
+<p>{{ resultado.explicacion }}</p>
+
+<h5 class="mt-4">📊 Proceso educativo por bloques (cada 8 bytes)</h5>
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Bloque (hex)</th>
+            <th>Contenido</th>
+            <th>Digest parcial</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paso in resultado.pasos %}
+        <tr>
+            <td><code>{{ paso.bloque }}</code></td>
+            <td>{{ paso.contenido }}</td>
+            <td><code>{{ paso.digest_parcial }}</code></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 {% endblock %}
