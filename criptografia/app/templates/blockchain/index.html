@@ -4,4 +4,15 @@
 <h2>Blockchain</h2>
 <p>Bienvenido a la sección de Blockchain.</p>
 <p>Teoría y conceptos.</p>
+<form action="/blockchain/add_block" method="POST">
+    <label for="data">Block Data:</label>
+    <input type="text" id="data" name="data">
+    <button type="submit">Add Block</button>
+</form>
+<h3>Blockchain:</h3>
+<ul>
+    {% for block in blockchain %}
+        <li>Block #{{ block.index }}: {{ block.data }} (Hash: {{ block.hash }})</li>
+    {% endfor %}
+</ul>
 {% endblock %}
