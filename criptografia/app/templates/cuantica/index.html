@@ -1,8 +1,257 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h2>Criptografía Cuántica</h2>
-<p>Bienvenido a la sección de Criptografía Cuántica.</p>
-<p>Teoría y conceptos básicos.</p>
-<a href="/cuantica/demostracion">Ver demostración</a>
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Criptografía Cuántica: Conceptos y Teorías
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explorando la frontera de la seguridad informática mediante principios de mecánica cuántica
+        </p>
+    </div>
+
+    <!-- Introducción -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-indigo-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">Introducción a la Criptografía Cuántica</h2>
+            </div>
+            <div class="prose prose-indigo max-w-none">
+                <p class="text-gray-700">
+                    La criptografía cuántica representa un cambio de paradigma en seguridad informática, utilizando principios fundamentales de la mecánica cuántica para garantizar comunicaciones inviolables. A diferencia de los sistemas clásicos que dependen de la complejidad computacional, esta aproximación se fundamenta en leyes físicas inmutables.
+                </p>
+                <p class="text-gray-700">
+                    Su desarrollo responde a la amenaza que representan las computadoras cuánticas para los sistemas criptográficos tradicionales, ofreciendo seguridad incondicional basada en las propiedades cuánticas de la materia.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Principios Fundamentales -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">Principios Fundamentales</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Heisenberg -->
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Principio de Incertidumbre</h3>
+                    <p class="text-sm text-gray-600 mb-2">Heisenberg demostró que ciertas propiedades físicas de partículas cuánticas no pueden medirse simultáneamente con precisión absoluta.</p>
+                    <p class="text-sm text-gray-700">En criptografía, esto protege contra la interceptación: cualquier medición altera irrevocablemente el estado cuántico, revelando la intrusión.</p>
+                </div>
+                
+                <!-- Entrelazamiento -->
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Entrelazamiento Cuántico</h3>
+                    <p class="text-sm text-gray-600 mb-2">Partículas entrelazadas exhiben correlaciones instantáneas independientes de la distancia que las separa.</p>
+                    <p class="text-sm text-gray-700">Esta propiedad permite protocolos como E91, donde la medición de una partícula determina inmediatamente el estado de su pareja entrelazada.</p>
+                </div>
+                
+                <!-- No Clonación -->
+                <div class="border-l-4 border-indigo-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-3">Teorema de No Clonación</h3>
+                    <p class="text-sm text-gray-600 mb-2">Es imposible crear una copia perfecta de un estado cuántico desconocido sin alterar el original.</p>
+                    <p class="text-sm text-gray-700">Garantiza que un atacante no pueda duplicar información cuántica para análisis posterior sin ser detectado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Protocolos Principales -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">Protocolos Principales</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- BB84 -->
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">BB84 (1984)</h3>
+                    <p class="text-gray-700 mb-3">Desarrollado por Charles Bennett y Gilles Brassard, fue el primer protocolo práctico de distribución cuántica de claves.</p>
+                    <div class="space-y-2">
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-sm text-gray-700">Utiliza estados de polarización de fotones en dos bases diferentes (rectilínea y diagonal)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-sm text-gray-700">La seguridad deriva del principio de incertidumbre: medir en la base incorrecta altera el estado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- E91 -->
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3">E91 (1991)</h3>
+                    <p class="text-gray-700 mb-3">Protocolo diseñado por Artur Ekert que utiliza pares de fotones entrelazados para establecer claves secretas.</p>
+                    <div class="space-y-2">
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-sm text-gray-700">Aprovecha las correlaciones cuánticas entre partículas entrelazadas</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-sm text-gray-700">La violación de las desigualdades de Bell detecta cualquier intento de interceptación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teorías Relacionadas -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">Teorías Relacionadas</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Información Cuántica -->
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Teoría de la Información Cuántica</h3>
+                    <p class="text-sm text-gray-700">Extiende los conceptos clásicos de bits a qubits, introduciendo superposición y entrelazamiento como recursos computacionales.</p>
+                </div>
+                
+                <!-- Computación Cuántica -->
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Computación Cuántica</h3>
+                    <p class="text-sm text-gray-700">Utiliza fenómenos cuánticos para realizar operaciones que superan exponencialmente las capacidades de las computadoras tradicionales.</p>
+                </div>
+                
+                <!-- Teleportación -->
+                <div class="border-l-4 border-indigo-500 pl-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Teleportación Cuántica</h3>
+                    <p class="text-sm text-gray-700">Protocolo que transfiere estados cuánticos entre ubicaciones distantes usando entrelazamiento y comunicación clásica.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aplicaciones y Desafíos -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <!-- Aplicaciones -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Aplicaciones Prácticas</h2>
+                </div>
+                
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Distribución Cuántica de Claves (QKD)</h3>
+                            <p class="text-sm text-gray-600">Sistemas comerciales ya disponibles para transmisión segura de claves criptográficas</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Redes de Comunicación Seguras</h3>
+                            <p class="text-sm text-gray-600">Implementaciones en redes bancarias, gubernamentales y militares</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Protección Post-Cuántica</h3>
+                            <p class="text-sm text-gray-600">Defensa contra futuros ataques con computadoras cuánticas</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Desafíos -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-red-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Desafíos Actuales</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Limitaciones de Distancia</h3>
+                            <p class="text-sm text-gray-600">La atenuación en fibras ópticas limita la transmisión a ~100-200 km sin repetidores</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Repeaters Cuánticos</h3>
+                            <p class="text-sm text-gray-600">La tecnología para repetidores cuánticos fiables aún está en desarrollo</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Implementación Práctica</h3>
+                            <p class="text-sm text-gray-600">Vulnerabilidades en dispositivos reales pueden explotarse en ataques tipo "side-channel"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

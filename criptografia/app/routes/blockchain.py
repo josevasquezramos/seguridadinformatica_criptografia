@@ -1,56 +1,69 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 import hashlib
-import time
-from flask import jsonify
-
+import json
 
 bp = Blueprint('blockchain', __name__, url_prefix='/blockchain')
 
-# Clase básica para el bloque
-class Block:
-    def __init__(self, index, previous_hash, timestamp, data, hash):
-        self.index = index
-        self.previous_hash = previous_hash
-        self.timestamp = timestamp
-        self.data = data
-        self.hash = hash
+# Simulamos una blockchain simple
+blockchain = [
+    {
+        'index': 0,
+        'transactions': [],
+        'proof': 100,
+        'previous_hash': '0',
+        'hash': 'genesis_hash'
+    }
+]
+current_transactions = []
 
-# Crear un bloque
-def create_block(previous_block, data):
-    index = previous_block.index + 1
-    timestamp = str(int(time.time()))  # Time as string
-    hash_value = hashlib.sha256(f"{index}{previous_block.hash}{timestamp}{data}".encode()).hexdigest()
-    block = Block(index, previous_block.hash, timestamp, data, hash_value)
-    return block
+def hash_block(block):
+    block_string = json.dumps(block, sort_keys=True).encode()
+    return hashlib.sha256(block_string).hexdigest()
 
-# Crear la cadena de bloques inicial
-def create_genesis_block():
-    return Block(0, "0", "2025-01-01", "Genesis Block", hashlib.sha256("Genesis Block".encode()).hexdigest())
-
-# Blockchain básico
-blockchain = [create_genesis_block()]
-previous_block = blockchain[0]
-
-# Ruta principal para Blockchain
 @bp.route('/')
 def index():
-    return render_template('blockchain/index.html', blockchain=blockchain)
+    return render_template('blockchain/index.html')
 
-# Ruta para la demostración de Blockchain
 @bp.route('/demostracion')
 def demostracion():
-    return render_template('blockchain/demostracion.html', blockchain=blockchain)
+    return render_template('blockchain/demostracion.html', 
+                         blockchain=blockchain,
+                         current_transactions=current_transactions)
 
-# Ruta para añadir un bloque a la cadena
-@bp.route('/add_block', methods=['POST'])
-def add_block():
-    data = request.form['data']
-    new_block = create_block(previous_block, data)
+@bp.route('/add_transaction', methods=['POST'])
+def add_transaction():
+    sender = request.form.get('sender')
+    recipient = request.form.get('recipient')
+    amount = request.form.get('amount')
+    
+    if sender and recipient and amount:
+        current_transactions.append({
+            'sender': sender,
+            'recipient': recipient,
+            'amount': amount
+        })
+    
+    return redirect(url_for('blockchain.demostracion'))
+
+@bp.route('/mine')
+def mine():
+    global blockchain, current_transactions
+    
+    last_block = blockchain[-1]
+    
+    # Simulamos un proof of work muy simple
+    proof = 12345
+    
+    # Creamos el nuevo bloque
+    new_block = {
+        'index': len(blockchain),
+        'transactions': current_transactions,
+        'proof': proof,
+        'previous_hash': last_block['hash'],
+        'hash': 'simulated_hash_' + str(len(blockchain))
+    }
+    
     blockchain.append(new_block)
-    return render_template('blockchain/index.html', blockchain=blockchain)
-
-# Ruta para obtener la cadena de bloques en formato JSON
-@bp.route('/blockchain_data')
-def blockchain_data():
-    chain_data = [{"index": block.index, "data": block.data} for block in blockchain]
-    return jsonify(chain_data)
+    current_transactions = []
+    
+    return redirect(url_for('blockchain.demostracion'))

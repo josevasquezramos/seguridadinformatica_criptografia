@@ -1,6 +1,587 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h2>Demostración - Criptografía Cuántica</h2>
-<p>Esta es la página de demostración del protocolo de intercambio de claves cuánticas.</p>
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Demostración Interactiva - Protocolo BB84
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Simulación del primer protocolo de distribución cuántica de claves usando polarización de fotones
+        </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+        <div class="p-6">
+            <!-- Controles de la demostración -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button id="start-demo" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Iniciar Demostración
+                </button>
+                <button id="step-by-step" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                    </svg>
+                    Paso a Paso
+                </button>
+                <button id="reset-demo" class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Reiniciar
+                </button>
+            </div>
+
+            <!-- Visualización de la demostración -->
+            <div class="demo-container">
+                <!-- Sección de Alice -->
+                <div class="participant-section alice">
+                    <div class="participant-header bg-blue-50">
+                        <h3 class="text-lg font-semibold text-blue-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Alice (Emisor)
+                        </h3>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 p-4">
+                        <div class="data-section">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Bits Aleatorios</h4>
+                            <div id="alice-bits" class="bits-display"></div>
+                        </div>
+                        
+                        <div class="data-section">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Bases de Polarización</h4>
+                            <div id="alice-bases" class="bases-display"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="photon-visualization p-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Fotones Polarizados</h4>
+                        <div class="flex justify-center">
+                            <canvas id="alice-photons" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canal Cuántico -->
+                <div class="quantum-channel">
+                    <div class="channel-header bg-purple-50" style="width: 140px;">
+                        <h4 class="text-sm font-semibold text-purple-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            Canal Cuántico
+                        </h4>
+                    </div>
+                    <div id="quantum-transmission" class="photons-transmission"></div>
+                </div>
+
+                <!-- Sección de Bob -->
+                <div class="participant-section bob">
+                    <div class="participant-header bg-green-50">
+                        <h3 class="text-lg font-semibold text-green-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Bob (Receptor)
+                        </h3>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 p-4">
+                        <div class="data-section">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Bases de Medición</h4>
+                            <div id="bob-bases" class="bases-display"></div>
+                        </div>
+                        
+                        <div class="data-section">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Resultados de Medición</h4>
+                            <div id="bob-results" class="bits-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reconciliación de Claves -->
+            <div class="key-reconciliation bg-gray-50 rounded-lg p-6 mt-8">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Reconciliación de Claves</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="data-section">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Bases que Coinciden</h4>
+                        <div id="matching-bases" class="matches-display"></div>
+                    </div>
+                    
+                    <div class="data-section">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Clave Secreta Compartida</h4>
+                        <div id="final-key" class="key-display"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explicación del Protocolo -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mt-8">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-indigo-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">¿Cómo funciona el protocolo BB84?</h2>
+            </div>
+            
+            <ol class="space-y-4">
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">1</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Alice genera bits aleatorios y elige bases de polarización</h3>
+                        <p class="text-sm text-gray-600">Para cada bit, Alice elige aleatoriamente entre la base rectilínea (+) o diagonal (×)</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">2</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Alice envía fotones polarizados a Bob</h3>
+                        <p class="text-sm text-gray-600">Cada fotón se polariza según el bit y base elegidos por Alice</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">3</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Bob mide los fotones en bases aleatorias</h3>
+                        <p class="text-sm text-gray-600">Bob no conoce las bases usadas por Alice y debe adivinarlas</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">4</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Alice y Bob comparan públicamente las bases usadas</h3>
+                        <p class="text-sm text-gray-600">Descartan los bits donde usaron bases diferentes</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">5</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Verificación de seguridad</h3>
+                        <p class="text-sm text-gray-600">Comparan públicamente un subconjunto de bits para detectar intrusos</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="bg-blue-100 text-blue-800 font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">6</span>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Obtención de la clave secreta</h3>
+                        <p class="text-sm text-gray-600">Los bits restantes forman la clave secreta compartida</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startBtn = document.getElementById('start-demo');
+    const stepBtn = document.getElementById('step-by-step');
+    const resetBtn = document.getElementById('reset-demo');
+    
+    // Elementos de visualización
+    const aliceBits = document.getElementById('alice-bits');
+    const aliceBases = document.getElementById('alice-bases');
+    const bobBases = document.getElementById('bob-bases');
+    const bobResults = document.getElementById('bob-results');
+    const matchingBases = document.getElementById('matching-bases');
+    const finalKey = document.getElementById('final-key');
+    const aliceCanvas = document.getElementById('alice-photons');
+    
+    // Variables de estado
+    let demoState = {
+        step: 0,
+        aliceBits: [],
+        aliceBases: [],
+        bobBases: [],
+        bobResults: [],
+        matchingIndices: [],
+        finalKey: []
+    };
+    
+    // Inicializar demostración
+    function initDemo() {
+        // Generar datos aleatorios para Alice
+        demoState.aliceBits = Array(8).fill(0).map(() => Math.round(Math.random()));
+        demoState.aliceBases = Array(8).fill(0).map(() => Math.round(Math.random()) ? '+' : '×');
+        
+        // Bob elige bases aleatorias para medir
+        demoState.bobBases = Array(8).fill(0).map(() => Math.round(Math.random()) ? '+' : '×');
+        
+        // Bob mide los fotones (simulación)
+        demoState.bobResults = demoState.aliceBits.map((bit, i) => {
+            // Si las bases coinciden, el bit es correcto
+            if(demoState.aliceBases[i] === demoState.bobBases[i]) {
+                return bit;
+            }
+            // Si no, 50% de probabilidad de acertar
+            return Math.random() > 0.5 ? bit : 1 - bit;
+        });
+        
+        // Encontrar índices donde las bases coinciden
+        demoState.matchingIndices = demoState.aliceBases.map((base, i) => 
+            base === demoState.bobBases[i] ? i : -1
+        ).filter(index => index !== -1);
+        
+        // Extraer la clave final
+        demoState.finalKey = demoState.matchingIndices.map(i => demoState.aliceBits[i]);
+        
+        demoState.step = 0;
+        updateDisplay();
+        drawPhotons();
+    }
+    
+    // Actualizar la visualización
+    function updateDisplay() {
+        // Mostrar solo hasta el paso actual
+        const showBits = demoState.step >= 1;
+        const showBobBases = demoState.step >= 2;
+        const showBobResults = demoState.step >= 3;
+        const showMatches = demoState.step >= 4;
+        const showFinalKey = demoState.step >= 5;
+        
+        // Alice
+        aliceBits.innerHTML = showBits ? 
+            demoState.aliceBits.map((bit, i) => 
+                `<span class="bit ${demoState.matchingIndices.includes(i) ? 'matched' : ''}">${bit}</span>`
+            ).join('') : '';
+        
+        aliceBases.innerHTML = showBits ? 
+            demoState.aliceBases.map((base, i) => 
+                `<span class="base ${demoState.matchingIndices.includes(i) ? 'matched' : ''}">${base}</span>`
+            ).join('') : '';
+        
+        // Bob
+        bobBases.innerHTML = showBobBases ? 
+            demoState.bobBases.map((base, i) => 
+                `<span class="base ${demoState.matchingIndices.includes(i) ? 'matched' : ''}">${base}</span>`
+            ).join('') : '';
+        
+        bobResults.innerHTML = showBobResults ? 
+            demoState.bobResults.map((bit, i) => 
+                `<span class="bit ${demoState.matchingIndices.includes(i) ? 'matched' : ''}">${bit}</span>`
+            ).join('') : '';
+        
+        // Reconciliación
+        matchingBases.innerHTML = showMatches ? 
+            demoState.matchingIndices.map(i => 
+                `<span class="match">Posición ${i+1}</span>`
+            ).join('') : '';
+        
+        finalKey.innerHTML = showFinalKey ? 
+            demoState.finalKey.map(bit => 
+                `<span class="key-bit">${bit}</span>`
+            ).join('') : '';
+        
+        // Actualizar visualización del canal cuántico
+        updateQuantumChannel();
+    }
+    
+    // Dibujar fotones en el canvas
+    function drawPhotons() {
+        const ctx = aliceCanvas.getContext('2d');
+        ctx.clearRect(0, 0, aliceCanvas.width, aliceCanvas.height);
+        
+        if(demoState.step >= 1) {
+            const photonWidth = 40;
+            const spacing = 10;
+            const centerY = aliceCanvas.height / 2;
+            
+            demoState.aliceBits.forEach((bit, i) => {
+                const x = i * (photonWidth + spacing) + photonWidth/2;
+                const base = demoState.aliceBases[i];
+                
+                // Dibujar fotón
+                ctx.beginPath();
+                ctx.arc(x, centerY, 15, 0, Math.PI * 2);
+                ctx.fillStyle = bit === 1 ? '#ef4444' : '#3b82f6';
+                ctx.fill();
+                ctx.strokeStyle = '#000';
+                ctx.stroke();
+                
+                // Dibujar polarización
+                ctx.save();
+                ctx.translate(x, centerY);
+                if(base === '×') ctx.rotate(Math.PI/4);
+                
+                ctx.beginPath();
+                ctx.moveTo(-10, 0);
+                ctx.lineTo(10, 0);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#000';
+                ctx.stroke();
+                
+                ctx.restore();
+                
+                // Etiqueta del fotón
+                ctx.font = '10px Arial';
+                ctx.fillStyle = '#000';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${i+1}`, x, centerY + 25);
+            });
+        }
+    }
+    
+    function updateQuantumChannel() {
+        const channel = document.getElementById('quantum-transmission');
+        channel.innerHTML = '';
+        
+        if(demoState.step >= 1) {
+            for(let i = 0; i < 8; i++) {
+                if(demoState.step >= 1 && i < demoState.aliceBits.length) {
+                    const photon = document.createElement('div');
+                    photon.className = `photon ${demoState.matchingIndices.includes(i) ? 'matched' : ''}`;
+                    
+                    const orientation = demoState.aliceBases[i] === '+' ? 'rect' : 'diag';
+                    const value = demoState.aliceBits[i] === 1 ? 'one' : 'zero';
+                    
+                    photon.innerHTML = `
+                        <div class="photon-visual ${orientation} ${value}">
+                            <div class="polarization"></div>
+                        </div>
+                        <div class="photon-info">
+                            <span>Bit: ${demoState.aliceBits[i]}</span>
+                            <span>Base: ${demoState.aliceBases[i]}</span>
+                        </div>
+                    `;
+                    
+                    channel.appendChild(photon);
+                }
+            }
+        }
+    }
+    
+    // Manejadores de eventos
+    startBtn.addEventListener('click', function() {
+        initDemo();
+        demoState.step = 5; // Mostrar todo
+        updateDisplay();
+        drawPhotons();
+    });
+    
+    stepBtn.addEventListener('click', function() {
+        if(demoState.step === 0) initDemo();
+        if(demoState.step < 5) {
+            demoState.step++;
+            updateDisplay();
+            drawPhotons();
+        }
+    });
+    
+    resetBtn.addEventListener('click', function() {
+        demoState.step = 0;
+        updateDisplay();
+        drawPhotons();
+    });
+    
+    // Inicializar
+    initDemo();
+});
+</script>
+
+<style>
+/* Estilos mejorados para la demostración */
+.demo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.participant-section {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.participant-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.alice {
+    border: 2px solid #3b82f6;
+}
+
+.bob {
+    border: 2px solid #10b981;
+}
+
+.quantum-channel {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px dashed #9ca3af;
+}
+
+.channel-header {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.photons-transmission {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.data-section {
+    background-color: #f9fafb;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.bits-display, .bases-display, .matches-display, .key-display {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.bit, .base, .key-bit, .match {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.bit {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+}
+
+.base {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.key-bit {
+    background-color: #fef3c7;
+    color: #d97706;
+    font-weight: bold;
+}
+
+.match {
+    background-color: #ede9fe;
+    color: #7c3aed;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    width: auto;
+    height: auto;
+}
+
+.matched {
+    border: 2px solid #10b981;
+}
+
+.photon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.photon.matched {
+    background-color: #ecfdf5;
+    border: 1px solid #10b981;
+}
+
+.photon-visual {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photon-visual.rect .polarization {
+    width: 70%;
+    height: 2px;
+    background-color: currentColor;
+}
+
+.photon-visual.diag .polarization {
+    width: 70%;
+    height: 2px;
+    background-color: currentColor;
+    transform: rotate(45deg);
+}
+
+.photon-visual.one {
+    color: #ef4444;
+}
+
+.photon-visual.zero {
+    color: #3b82f6;
+}
+
+.photon-info {
+    font-size: 0.65rem;
+    text-align: center;
+    color: #6b7280;
+}
+
+.key-reconciliation {
+    border-top: 2px solid #e5e7eb;
+}
+
+@media (min-width: 768px) {
+    .demo-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .participant-section {
+        width: 45%;
+    }
+    
+    .quantum-channel {
+        width: 12%;
+        min-height: 200px;
+        margin: 0;
+    }
+}
+</style>
 {% endblock %}
