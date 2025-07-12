@@ -1,7 +1,343 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h2>Autenticación y Firma Digital</h2>
-<p>Bienvenido a la sección de Autenticación y Firma Digital.</p>
-<p>Teoría y conceptos.</p>
+<div class="max-w-6xl mx-auto py-8 px-4">
+    <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <!-- Cabecera -->
+        <header class="bg-gradient-to-r from-blue-800 to-purple-700 text-white p-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">Autenticación y Firma Digital</h1>
+            <p class="text-blue-200 text-xl">Teoría y Conceptos Fundamentales</p>
+        </header>
+
+        <div class="p-8">
+            <!-- Introducción -->
+            <section id="introduccion" class="mb-12">
+                <div class="prose max-w-none">
+                    <p class="text-lg text-gray-700">La autenticación y firma digital son componentes fundamentales de la seguridad informática moderna, permitiendo verificar la identidad de los participantes en una comunicación digital y asegurar la integridad de los documentos electrónicos.</p>
+                </div>
+            </section>
+
+            <!-- Grid de contenido principal -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Columna izquierda - Autenticación -->
+                <div class="md:col-span-1">
+                    <section id="autenticacion" class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-8">
+                        <h2 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            Autenticación Digital
+                        </h2>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-blue-700 mb-2">Concepto</h3>
+                            <p class="text-gray-700">Proceso de verificación de la identidad de un usuario, sistema o entidad en el entorno digital.</p>
+                        </article>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-blue-700 mb-2">Métodos</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-0.5 rounded">Sabes</span>
+                                    <span>Contraseñas, PINs, preguntas de seguridad</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-0.5 rounded">Tienes</span>
+                                    <span>Tokens físicos, tarjetas inteligentes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-0.5 rounded">Eres</span>
+                                    <span>Biometría (huellas, reconocimiento facial)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-0.5 rounded">MFA</span>
+                                    <span>Autenticación multifactor</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article>
+                            <h3 class="text-lg font-medium text-blue-700 mb-2">Protocolos</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <span class="bg-white text-sm px-3 py-1 rounded border">Kerberos</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border">OAuth</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border">OpenID</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border">SAML</span>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Consideraciones Legales -->
+                    <section id="consideraciones-legales" class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                        <h2 class="text-2xl font-semibold text-purple-800 mb-4">Consideraciones Legales</h2>
+                        
+                        <article class="mb-4">
+                            <h3 class="text-lg font-medium text-purple-700 mb-2">Validez Legal</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Uso de certificados reconocidos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Dispositivos seguros de firma</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Protección de claves privadas</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article>
+                            <h3 class="text-lg font-medium text-purple-700 mb-2">Regulaciones</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Reglamento eIDAS (UE)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Ley de Firmas Electrónicas (EEUU)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span>Normativas locales</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </section>
+                </div>
+
+                <!-- Columna central - Firma Digital -->
+                <div class="md:col-span-1">
+                    <section id="firma-digital" class="bg-green-50 p-6 rounded-lg border border-green-200 mb-8">
+                        <h2 class="text-2xl font-semibold text-green-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            Firma Digital
+                        </h2>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-green-700 mb-2">Definición</h3>
+                            <p class="text-gray-700">Mecanismo criptográfico que verifica la autenticidad e integridad de mensajes o documentos digitales.</p>
+                        </article>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-green-700 mb-2">Características</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start p-3 bg-white rounded-md border border-green-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Autenticidad</h4>
+                                        <p class="text-sm text-gray-600">Verifica la identidad del firmante</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-3 bg-white rounded-md border border-green-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Integridad</h4>
+                                        <p class="text-sm text-gray-600">Asegura que no hubo alteraciones</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-3 bg-white rounded-md border border-green-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">No repudio</h4>
+                                        <p class="text-sm text-gray-600">El firmante no puede negar la autoría</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-green-700 mb-2">Proceso</h3>
+                            <ol class="space-y-3 text-sm">
+                                <li class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2 py-0.5 rounded">1</span>
+                                    <span>Generar hash del documento</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2 py-0.5 rounded">2</span>
+                                    <span>Cifrar hash con clave privada</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2 py-0.5 rounded">3</span>
+                                    <span>Adjuntar firma al documento</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2 py-0.5 rounded">4</span>
+                                    <span>Verificar con clave pública</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2 py-0.5 rounded">5</span>
+                                    <span>Comparar hashes</span>
+                                </li>
+                            </ol>
+                        </article>
+
+                        <article>
+                            <h3 class="text-lg font-medium text-green-700 mb-2">Algoritmos</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-green-200">RSA</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-green-200">DSA</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-green-200">ECDSA</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-green-200">EdDSA</span>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Desafíos -->
+                    <section id="desafios" class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                        <h2 class="text-2xl font-semibold text-yellow-800 mb-4">Desafíos de Seguridad</h2>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>Gestión segura de claves privadas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>Revocación de certificados</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>Protección contra phishing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>Actualización de algoritmos</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Columna derecha - Certificados Digitales -->
+                <div class="md:col-span-1">
+                    <section id="certificados-digitales" class="bg-indigo-50 p-6 rounded-lg border border-indigo-200 mb-8">
+                        <h2 class="text-2xl font-semibold text-indigo-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            Certificados Digitales
+                        </h2>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-indigo-700 mb-2">¿Qué son?</h3>
+                            <p class="text-gray-700">Documentos electrónicos que vinculan una clave pública con una identidad, emitidos por una Autoridad Certificadora (CA).</p>
+                        </article>
+
+                        <article class="mb-6">
+                            <h3 class="text-lg font-medium text-indigo-700 mb-2">Estructura X.509</h3>
+                            <div class="bg-white p-4 rounded-md border border-indigo-200">
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Versión del certificado</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Número de serie</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Algoritmo de firma</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Emisor (CA)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Periodo de validez</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Sujeto (propietario)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Clave pública del sujeto</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-indigo-500 mr-2">•</span>
+                                        <span>Firma digital de la CA</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <article>
+                            <h3 class="text-lg font-medium text-indigo-700 mb-2">PKI</h3>
+                            <p class="text-gray-700 mb-3">Infraestructura de Clave Pública que gestiona certificados:</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-indigo-200">CA</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-indigo-200">RA</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-indigo-200">Repositorio</span>
+                                <span class="bg-white text-sm px-3 py-1 rounded border border-indigo-200">CRL</span>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Aplicaciones -->
+                    <section id="aplicaciones" class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Aplicaciones Prácticas</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                </svg>
+                                <span class="text-sm">Banca online</span>
+                            </div>
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span class="text-sm">e-Commerce</span>
+                            </div>
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span class="text-sm">Documentos legales</span>
+                            </div>
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span class="text-sm">Email seguro</span>
+                            </div>
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                <span class="text-sm">Control de acceso</span>
+                            </div>
+                            <div class="flex items-start p-3 bg-white rounded-md border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                                <span class="text-sm">Validación de software</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
 {% endblock %}

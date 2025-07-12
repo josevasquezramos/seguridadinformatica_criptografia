@@ -1,43 +1,132 @@
-{% extends 'simetrico_bloque/base.html' %}
+{% extends 'layout.html' %}
 
-{% block title %}Cifrado Simétrico en Bloque{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <article class="space-y-8">
+        <!-- Encabezado -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Cifrado Simétrico en Bloque (AES)
+            </h1>
+            <p class="text-lg text-gray-600">El estándar de cifrado avanzado más utilizado en la actualidad</p>
+        </div>
 
-{% block simetrico_bloque_content %}
-<article class="intro-section">
-    <h2>Cifrado Simétrico en Bloque (AES)</h2>
+        <!-- Qué es el cifrado en bloque -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">¿Qué es el cifrado en bloque?</h2>
+                </div>
+                <p class="text-gray-700">Un cifrado en bloque es un algoritmo de cifrado simétrico que opera sobre grupos de bits de longitud fija (bloques). <strong class="text-blue-600">AES (Advanced Encryption Standard)</strong> es el estándar actual más utilizado, aprobado por el NIST en 2001 como reemplazo de DES.</p>
+            </div>
+        </div>
 
-    <div class="info-card">
-        <h3>¿Qué es el cifrado en bloque?</h3>
-        <p>Un cifrado en bloque es un algoritmo de cifrado simétrico que opera sobre grupos de bits de longitud fija
-            (bloques). AES (Advanced Encryption Standard) es el estándar actual más utilizado.</p>
-    </div>
+        <!-- Características principales -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Características principales</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-700">Opera sobre bloques de <strong>128 bits</strong> (16 bytes)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-700">Claves de <strong>128, 192 o 256 bits</strong></span>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-700"><strong>10, 12 o 14 rondas</strong> según tamaño de clave</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-700">Más seguro que los cifrados en flujo básicos</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div class="info-card">
-        <h3>Características principales</h3>
-        <ul>
-            <li>Opera sobre bloques de tamaño fijo (128 bits para AES)</li>
-            <li>Claves de 128, 192 o 256 bits</li>
-            <li>Más seguro que los cifrados en flujo básicos</li>
-            <li>Implementa rondas de transformación (10, 12 o 14 según tamaño de clave)</li>
-        </ul>
-    </div>
+        <!-- Demostración interactiva -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-purple-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Prueba el cifrado AES</h2>
+                </div>
+                <p class="text-gray-700 mb-4">Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado estándar en la industria.</p>
+                <a href="{{ url_for('simetrico_bloque.demostracion') }}" 
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Ir a demostración interactiva
+                </a>
+            </div>
+        </div>
 
-    <div class="action-card">
-        <h3>Prueba el cifrado AES</h3>
-        <p>Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado.</p>
-        <br>
-        <a href="{{ url_for('simetrico_bloque.demostracion') }}" class="btn btn-primary">Ir a demostración</a>
-    </div>
-
-    <div class="algorithm-card">
-        <h3>Algoritmo AES</h3>
-        <p>Nuestra implementación utiliza AES en modo CBC (Cipher Block Chaining):</p>
-        <br>
-        <pre>Proceso de cifrado:
-1. Padding del texto para completar bloques
-2. Generación de IV (Vector de Inicialización)
-3. Aplicación de transformaciones por bloques
-4. Concatenación del IV con el texto cifrado</pre>
-    </div>
-</article>
+        <!-- Algoritmo AES -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Algoritmo AES (Modo CBC)</h2>
+                </div>
+                <p class="text-gray-700 mb-4">Nuestra implementación utiliza AES en modo CBC (Cipher Block Chaining), que añade un vector de inicialización para mayor seguridad:</p>
+                
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <pre class="text-sm font-mono text-gray-800 overflow-x-auto">Proceso de cifrado:
+1. <span class="text-blue-600">Padding PKCS#7</span> - Completa el texto para múltiplos de 16 bytes
+2. <span class="text-blue-600">Generación de IV</span> - Vector de inicialización aleatorio (16 bytes)
+3. <span class="text-blue-600">Cifrado por bloques</span> - Aplicación de transformaciones:
+   - SubBytes
+   - ShiftRows
+   - MixColumns
+   - AddRoundKey
+4. <span class="text-blue-600">Concatenación</span> - IV + texto cifrado en Base64</pre>
+                </div>
+                
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Seguridad en CBC</h3>
+                    <p class="text-sm text-gray-700">El modo CBC protege contra patrones repetitivos al XOR cada bloque con el cifrado del bloque anterior, comenzando con el IV. Esto asegura que mensajes idénticos produzcan resultados diferentes.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
 {% endblock %}

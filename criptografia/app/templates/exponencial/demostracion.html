@@ -1,76 +1,191 @@
 {% extends 'layout.html' %}
+
 {% block content %}
-<h2>Demostración - Cifrado Asimétrico Exponencial (Diffie-Hellman + AES)</h2>
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <!-- Cabecera -->
+        <header class="bg-gradient-to-r from-blue-800 to-purple-700 text-white p-6">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+                <div>
+                    <h2 class="text-2xl font-bold">Demostración - Cifrado Asimétrico Exponencial</h2>
+                    <p class="text-blue-200">Diffie-Hellman + AES</p>
+                </div>
+            </div>
+        </header>
 
-<form method="POST">
-    <div class="mb-3">
-        <label>Modo:</label>
-        <select name="modo" id="modo" class="form-select" onchange="toggleCampos()">
-            <option value="manual">Manual</option>
-            <option value="auto">Automático</option>
-        </select>
-    </div>
+        <div class="p-6">
+            <!-- Formulario -->
+            <form method="POST" class="space-y-6">
+                <!-- Selector de Modo -->
+                <div>
+                    <label for="modo" class="block text-sm font-medium text-gray-700 mb-1">Modo</label>
+                    <select name="modo" id="modo" onchange="toggleCampos()"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option value="manual">Manual</option>
+                        <option value="auto">Automático</option>
+                    </select>
+                </div>
 
-    <div class="mb-3">
-        <label>p (número primo grande):</label>
-        <input type="number" name="p" class="form-control" value="467" required>
-    </div>
+                <!-- Parámetros públicos -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="p" class="block text-sm font-medium text-gray-700 mb-1">p (número primo grande)</label>
+                        <input type="number" name="p" id="p" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            value="467">
+                    </div>
+                    <div>
+                        <label for="g" class="block text-sm font-medium text-gray-700 mb-1">g (generador)</label>
+                        <input type="number" name="g" id="g" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            value="2">
+                    </div>
+                </div>
 
-    <div class="mb-3">
-        <label>g (generador):</label>
-        <input type="number" name="g" class="form-control" value="2" required>
-    </div>
+                <!-- Campos manuales -->
+                <div id="campos-manuales" class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="a" class="block text-sm font-medium text-gray-700 mb-1">Clave privada de A (a)</label>
+                        <input type="number" name="a" id="a"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            value="5">
+                    </div>
+                    <div>
+                        <label for="b" class="block text-sm font-medium text-gray-700 mb-1">Clave privada de B (b)</label>
+                        <input type="number" name="b" id="b"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            value="7">
+                    </div>
+                </div>
 
-    <div id="campos-manuales">
-        <div class="mb-3">
-            <label>Clave privada de A (a):</label>
-            <input type="number" name="a" class="form-control" value="5">
+                <!-- Mensaje opcional -->
+                <div>
+                    <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Mensaje a cifrar (opcional)</label>
+                    <input type="text" name="mensaje" id="mensaje"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Escribe un mensaje para cifrar...">
+                </div>
+
+                <!-- Botón de envío -->
+                <div>
+                    <button type="submit" 
+                        class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition-colors flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Ejecutar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Resultados -->
+            {% if resultado %}
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                {% if resultado.error %}
+                <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-800">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        <div><strong>Error:</strong> {{ resultado.error }}</div>
+                    </div>
+                </div>
+                {% else %}
+                <h4 class="text-xl font-semibold text-gray-800 mb-4">Resultados</h4>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Datos básicos -->
+                    <div class="space-y-3">
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">p:</span>
+                            <span class="font-mono bg-gray-100 px-3 py-1 rounded">{{ resultado.p }}</span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">g:</span>
+                            <span class="font-mono bg-gray-100 px-3 py-1 rounded">{{ resultado.g }}</span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">a (A):</span>
+                            <span class="font-mono bg-gray-100 px-3 py-1 rounded">{{ resultado.a }}</span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">b (B):</span>
+                            <span class="font-mono bg-gray-100 px-3 py-1 rounded">{{ resultado.b }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Cálculos -->
+                    <div class="space-y-3">
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">A = g^a mod p:</span>
+                            <span class="font-mono bg-blue-100 text-blue-800 px-3 py-1 rounded">{{ resultado.A }}</span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">B = g^b mod p:</span>
+                            <span class="font-mono bg-blue-100 text-blue-800 px-3 py-1 rounded">{{ resultado.B }}</span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-gray-600 font-medium w-32">Clave secreta:</span>
+                            <span class="font-mono bg-green-100 text-green-800 overflow-x-auto px-3 py-1 rounded text-sm">{{ resultado.clave_hex }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje cifrado -->
+                {% if resultado.mensaje %}
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h5 class="text-lg font-medium text-gray-800 mb-3">Mensaje Cifrado</h5>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-gray-600 font-medium">Mensaje original:</p>
+                            <div class="bg-white p-3 rounded-md border border-gray-300">
+                                {{ resultado.mensaje }}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p class="text-gray-600 font-medium">Cifrado (base64):</p>
+                            <div class="bg-gray-800 text-green-400 p-3 rounded-md overflow-x-auto text-sm">
+                                {{ resultado.mensaje_cifrado }}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p class="text-gray-600 font-medium">Descifrado:</p>
+                            <div class="bg-white p-3 rounded-md border border-gray-300">
+                                {{ resultado.mensaje_descifrado }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
-
-        <div class="mb-3">
-            <label>Clave privada de B (b):</label>
-            <input type="number" name="b" class="form-control" value="7">
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label>Mensaje a cifrar (opcional):</label>
-        <input type="text" name="mensaje" class="form-control" placeholder="Escribe un mensaje para cifrar...">
-    </div>
-
-    <button type="submit" class="btn btn-success">Ejecutar</button>
-</form>
+    </article>
+</div>
 
 <script>
-    function toggleCampos() {
-        const modo = document.getElementById('modo').value;
-        const campos = document.getElementById('campos-manuales');
-        campos.style.display = (modo === 'manual') ? 'block' : 'none';
+function toggleCampos() {
+    const modo = document.getElementById('modo').value;
+    const campos = document.getElementById('campos-manuales');
+    campos.style.display = (modo === 'manual') ? 'grid' : 'none';
+    
+    // Opcional: Limpiar campos cuando se cambia a automático
+    if (modo === 'auto') {
+        document.getElementById('a').value = '';
+        document.getElementById('b').value = '';
     }
+}
+
+// Inicializar estado al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    toggleCampos();
+});
 </script>
-
-{% if resultado %}
-<hr>
-{% if resultado.error %}
-    <div class="alert alert-danger">Error: {{ resultado.error }}</div>
-{% else %}
-    <h4>Resultados</h4>
-    <ul>
-        <li><strong>p:</strong> {{ resultado.p }}</li>
-        <li><strong>g:</strong> {{ resultado.g }}</li>
-        <li><strong>Clave privada a (A):</strong> {{ resultado.a }}</li>
-        <li><strong>Clave privada b (B):</strong> {{ resultado.b }}</li>
-        <li><strong>A = g^a mod p:</strong> {{ resultado.A }}</li>
-        <li><strong>B = g^b mod p:</strong> {{ resultado.B }}</li>
-        <li><strong>Clave secreta (SHA-256):</strong> {{ resultado.clave_hex }}</li>
-    </ul>
-
-    {% if resultado.mensaje %}
-    <h5>Mensaje Cifrado</h5>
-    <p><strong>Mensaje original:</strong> {{ resultado.mensaje }}</p>
-    <p><strong>Cifrado (base64):</strong> {{ resultado.mensaje_cifrado }}</p>
-    <p><strong>Descifrado:</strong> {{ resultado.mensaje_descifrado }}</p>
-    {% endif %}
-{% endif %}
-{% endif %}
 {% endblock %}

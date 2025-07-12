@@ -1,6 +1,222 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h2>Demostración - Autenticación y Firma Digital</h2>
-<p>Esta es la página de demostración del algoritmo de Autenticación y Firma Digital.</p>
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Demostración Real de Firma Digital</h1>
+
+    <!-- Sección de Generación de Firma -->
+    <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="flex items-center mb-6">
+            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-semibold text-gray-700">Generación de Firma Digital</h2>
+        </div>
+
+        <form id="formGenerarFirma" class="space-y-4">
+            <div>
+                <label for="documento" class="block text-sm font-medium text-gray-700 mb-1">Documento a firmar:</label>
+                <textarea id="documento" rows="5" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Ingrese el texto a firmar..."></textarea>
+            </div>
+            <button type="submit" 
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Generar Firma Digital
+            </button>
+        </form>
+
+        <div id="resultadoFirma" class="hidden mt-6 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Resultados de Firma:</h4>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Hash SHA-256 del documento:</p>
+                    <pre id="hashDocumento" class="p-3 bg-gray-100 rounded-md overflow-x-auto text-sm"></pre>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Firma digital (Base64):</p>
+                    <pre id="firmaGenerada" class="p-3 bg-gray-100 rounded-md overflow-x-auto text-sm"></pre>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Clave pública PEM:</p>
+                    <pre id="clavePublica" class="p-3 bg-gray-100 rounded-md overflow-x-auto text-sm"></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Separador -->
+    <div class="relative my-8">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center">
+            <span class="px-3 bg-white text-sm text-gray-500">Verificación</span>
+        </div>
+    </div>
+
+    <!-- Sección de Verificación de Firma -->
+    <section class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-6">
+            <div class="bg-green-100 p-3 rounded-full mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-semibold text-gray-700">Verificación de Firma</h2>
+        </div>
+
+        <form id="formVerificarFirma" class="space-y-4">
+            <div>
+                <label for="documentoOriginal" class="block text-sm font-medium text-gray-700 mb-1">Documento original:</label>
+                <textarea id="documentoOriginal" rows="3" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Pegue el documento original..."></textarea>
+            </div>
+            <div>
+                <label for="firmaAVerificar" class="block text-sm font-medium text-gray-700 mb-1">Firma a verificar (Base64):</label>
+                <textarea id="firmaAVerificar" rows="2" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Pegue la firma en Base64..."></textarea>
+            </div>
+            <div>
+                <label for="clavePublicaFirmante" class="block text-sm font-medium text-gray-700 mb-1">Clave pública del firmante (PEM):</label>
+                <textarea id="clavePublicaFirmante" rows="6" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Pegue la clave pública PEM..."></textarea>
+            </div>
+            <button type="submit" 
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                Verificar Firma
+            </button>
+        </form>
+
+        <div id="resultadoVerificacion" class="hidden mt-6 p-6 border border-gray-200 rounded-lg">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Resultado de Verificación:</h4>
+            <div id="estadoVerificacion" class="text-lg font-semibold mb-4"></div>
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Documento original:</p>
+                <pre id="documentoRecuperado" class="p-3 bg-gray-100 rounded-md overflow-x-auto text-sm"></pre>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Generación de firma
+    document.getElementById('formGenerarFirma').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const documento = document.getElementById('documento').value;
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        
+        try {
+            // Mostrar estado de carga
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Procesando...
+            `;
+            
+            const response = await fetch('/firma/generar-firma', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ documento })
+            });
+            
+            if (!response.ok) throw new Error('Error en el servidor');
+            
+            const data = await response.json();
+            
+            document.getElementById('hashDocumento').textContent = data.hash;
+            document.getElementById('firmaGenerada').textContent = data.firma;
+            document.getElementById('clavePublica').textContent = data.clave_publica;
+            document.getElementById('resultadoFirma').classList.remove('hidden');
+            
+            // Autorellenar verificación
+            document.getElementById('documentoOriginal').value = documento;
+            document.getElementById('firmaAVerificar').value = data.firma;
+            document.getElementById('clavePublicaFirmante').value = data.clave_publica;
+            
+        } catch (error) {
+            alert('Error: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Generar Firma Digital';
+        }
+    });
+
+    // Verificación de firma
+    document.getElementById('formVerificarFirma').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const datos = {
+            documento: document.getElementById('documentoOriginal').value,
+            firma: document.getElementById('firmaAVerificar').value,
+            clave_publica: document.getElementById('clavePublicaFirmante').value
+        };
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        
+        try {
+            // Mostrar estado de carga
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Verificando...
+            `;
+            
+            const response = await fetch('/firma/verificar-firma', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) throw new Error(data.error || 'Error desconocido');
+            
+            const resultado = document.getElementById('resultadoVerificacion');
+            const estado = document.getElementById('estadoVerificacion');
+            
+            if (data.valido) {
+                estado.innerHTML = `
+                    <span class="text-green-600 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        FIRMA VÁLIDA - El documento es auténtico e íntegro
+                    </span>
+                `;
+            } else {
+                estado.innerHTML = `
+                    <span class="text-red-600 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        FIRMA INVÁLIDA - El documento ha sido alterado o la firma no coincide
+                    </span>
+                `;
+            }
+            
+            document.getElementById('documentoRecuperado').textContent = data.documento_original;
+            resultado.classList.remove('hidden');
+            
+        } catch (error) {
+            alert('Error en verificación: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Verificar Firma';
+        }
+    });
+});
+</script>
 {% endblock %}

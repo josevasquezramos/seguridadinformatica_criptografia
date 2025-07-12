@@ -1,58 +1,152 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2>Demostración - Cifrado de Mochilas</h2>
-
-<form method="POST">
-    <div class="mb-3">
-        <label for="accion" class="form-label">Selecciona una acción:</label>
-        <select id="accion" name="accion" class="form-select" onchange="mostrarCampos()">
-            <option value="cifrar">Cifrar</option>
-            <option value="descifrar">Descifrar</option>
-        </select>
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            Demostración Práctica de Cifrado de Mochilas
+        </h1>
+        <p class="text-gray-600">Experimenta con el algoritmo de Merkle-Hellman para cifrado asimétrico</p>
     </div>
 
-    <!-- Campo para cifrar -->
-    <div class="mb-3" id="campo-cifrar">
-        <label for="mensaje" class="form-label">Mensaje a cifrar:</label>
-        <input type="text" name="mensaje" id="mensaje" class="form-control">
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+        <div class="p-6">
+            <form method="POST" class="space-y-4">
+                <div>
+                    <label for="accion" class="block text-sm font-medium text-gray-700 mb-1">Selecciona una acción:</label>
+                    <select id="accion" name="accion" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="mostrarCampos()">
+                        <option value="cifrar">Cifrar mensaje</option>
+                        <option value="descifrar">Descifrar valores</option>
+                    </select>
+                </div>
+
+                <!-- Campo para cifrar -->
+                <div id="campo-cifrar">
+                    <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Mensaje a cifrar:</label>
+                    <input type="text" name="mensaje" id="mensaje" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="Ingresa tu mensaje aquí">
+                </div>
+
+                <!-- Campo para descifrar -->
+                <div id="campo-descifrar" class="hidden">
+                    <label for="cifrado" class="block text-sm font-medium text-gray-700 mb-1">Valores cifrados:</label>
+                    <input type="text" name="cifrado" id="cifrado" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="Ej: 502,312,198 (separados por comas)">
+                    <p class="text-xs text-gray-500 mt-1">Ingresa los valores numéricos separados por comas</p>
+                </div>
+
+                <button type="submit" 
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Ejecutar Operación
+                </button>
+            </form>
+        </div>
     </div>
 
-    <!-- Campo para descifrar -->
-    <div class="mb-3" id="campo-descifrar" style="display: none;">
-        <label for="cifrado" class="form-label">Valores cifrados (separados por coma):</label>
-        <input type="text" name="cifrado" id="cifrado" class="form-control" placeholder="Ej: 502,312,198">
-    </div>
+    {% if resultado %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+            {% if resultado.error %}
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700">{{ resultado.error }}</p>
+                    </div>
+                </div>
+            </div>
+            {% elif resultado.modo == 'cifrado' %}
+            <div class="space-y-4">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Resultado del Cifrado</h2>
+                </div>
 
-    <button type="submit" class="btn btn-success">Ejecutar</button>
-</form>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-medium text-gray-800 mb-2">Mensaje original</h3>
+                        <p class="font-mono">{{ resultado.mensaje_original }}</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-medium text-gray-800 mb-2">Representación binaria</h3>
+                        <p class="font-mono">{{ resultado.mensaje_binario }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Valores cifrados</h3>
+                    <p class="font-mono text-blue-600">{{ resultado.cifrado }}</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Clave pública usada</h3>
+                    <p class="font-mono">{{ resultado.mochila_publica }}</p>
+                </div>
+            </div>
+            {% elif resultado.modo == 'descifrado' %}
+            <div class="space-y-4">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Resultado del Descifrado</h2>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Valores cifrados recibidos</h3>
+                    <p class="font-mono">{{ resultado.cifrado }}</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-medium text-gray-800 mb-2">Representación binaria</h3>
+                        <p class="font-mono">{{ resultado.descifrado_bin }}</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-medium text-gray-800 mb-2">Mensaje descifrado</h3>
+                        <p class="font-mono text-green-600">{{ resultado.mensaje_descifrado }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
 
 <script>
-    function mostrarCampos() {
-        var accion = document.getElementById("accion").value;
-        document.getElementById("campo-cifrar").style.display = (accion === "cifrar") ? "block" : "none";
-        document.getElementById("campo-descifrar").style.display = (accion === "descifrar") ? "block" : "none";
+function mostrarCampos() {
+    const accion = document.getElementById("accion").value;
+    document.getElementById("campo-cifrar").classList.toggle("hidden", accion !== "cifrar");
+    document.getElementById("campo-descifrar").classList.toggle("hidden", accion !== "descifrar");
+    
+    // Limpiar campos al cambiar
+    if(accion === "cifrar") {
+        document.getElementById("cifrado").value = "";
+    } else {
+        document.getElementById("mensaje").value = "";
     }
-</script>
+}
 
-{% if resultado %}
-<hr>
-{% if resultado.error %}
-    <div class="alert alert-danger">{{ resultado.error }}</div>
-{% elif resultado.modo == 'cifrado' %}
-    <h4>Resultado del Cifrado</h4>
-    <ul>
-        <li><strong>Mensaje original:</strong> {{ resultado.mensaje_original }}</li>
-        <li><strong>Binario:</strong> {{ resultado.mensaje_binario }}</li>
-        <li><strong>Cifrado:</strong> {{ resultado.cifrado }}</li>
-        <li><strong>Clave pública:</strong> {{ resultado.mochila_publica }}</li>
-    </ul>
-{% elif resultado.modo == 'descifrado' %}
-    <h4>Resultado del Descifrado</h4>
-    <ul>
-        <li><strong>Cifrado recibido:</strong> {{ resultado.cifrado }}</li>
-        <li><strong>Binarios:</strong> {{ resultado.descifrado_bin }}</li>
-        <li><strong>Mensaje descifrado:</strong> {{ resultado.mensaje_descifrado }}</li>
-    </ul>
-{% endif %}
-{% endif %}
+// Inicializar correctamente los campos al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarCampos();
+});
+</script>
 {% endblock %}

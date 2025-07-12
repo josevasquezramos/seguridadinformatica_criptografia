@@ -1,83 +1,227 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2>🔐 Funciones Hash en Criptografía</h2>
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Funciones Hash en Criptografía
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Las <strong class="text-blue-600">funciones hash</strong> son algoritmos matemáticos que transforman cualquier entrada en una <strong class="text-blue-600">huella digital</strong> de longitud fija. Son fundamentales en la seguridad informática por su capacidad para verificar integridad de datos sin revelar el contenido original.
+        </p>
+    </div>
 
-<p>Las <strong>funciones hash</strong> son algoritmos matemáticos que transforman cualquier entrada en una <strong>huella digital</strong> de longitud fija. Son fundamentales en la seguridad informática por su capacidad para verificar integridad de datos sin revelar el contenido original.</p>
+    <!-- Características -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Características de una buena función hash</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Determinista</h3>
+                        <p class="text-sm text-gray-600">Siempre genera el mismo hash para la misma entrada.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Irreversible</h3>
+                        <p class="text-sm text-gray-600">No se puede recuperar el texto original desde el hash.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Eficiente</h3>
+                        <p class="text-sm text-gray-600">Computacionalmente rápida de calcular.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Sensible a cambios</h3>
+                        <p class="text-sm text-gray-600">Pequeños cambios en la entrada generan hashes completamente distintos.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Resistente a colisiones</h3>
+                        <p class="text-sm text-gray-600">Difícil encontrar dos entradas distintas con el mismo hash.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<hr>
+    <!-- Usos -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Aplicaciones de las funciones hash</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Verificar la integridad de archivos y mensajes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Almacenar contraseñas de forma segura</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Firmas digitales y certificados</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Seguridad en Blockchain</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Detección de duplicados o datos alterados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 p-1 rounded-full mr-3 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Técnicas de autenticación y validación</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<h4>📌 Características de una buena función hash:</h4>
-<ul>
-  <li><strong>Determinista:</strong> siempre genera el mismo hash para la misma entrada.</li>
-  <li><strong>Irreversible:</strong> no se puede recuperar el texto original desde el hash.</li>
-  <li><strong>Eficiente:</strong> computacionalmente rápida.</li>
-  <li><strong>Sensible a cambios:</strong> pequeños cambios en la entrada generan hashes completamente distintos.</li>
-  <li><strong>Sin colisiones:</strong> difícil encontrar dos entradas distintas con el mismo hash.</li>
-</ul>
+    <!-- Tabla de Algoritmos -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Algoritmos hash más comunes</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Algoritmo</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Longitud</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seguridad</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uso común</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="font-medium text-gray-900">MD5</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">128 bits</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Baja (vulnerable)</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">Checksums y pruebas simples</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="font-medium text-gray-900">SHA-1</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">160 bits</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Media (obsoleto)</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">Certificados antiguos</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="font-medium text-gray-900">SHA-256</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">256 bits</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Alta</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">Blockchain, SSL/TLS, JWT</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="font-medium text-gray-900">SHA-512</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">512 bits</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Muy alta</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">Seguridad avanzada</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<hr>
-
-<h4>🔍 ¿Para qué se usan?</h4>
-<div class="row">
-  <div class="col-md-6">
-    <ul>
-      <li>Verificar la integridad de archivos y mensajes.</li>
-      <li>Almacenar contraseñas de forma segura.</li>
-      <li>Firmas digitales y certificados.</li>
-    </ul>
-  </div>
-  <div class="col-md-6">
-    <ul>
-      <li>Seguridad en Blockchain.</li>
-      <li>Detección de duplicados o datos alterados.</li>
-      <li>Técnicas de autenticación y validación.</li>
-    </ul>
-  </div>
-</div>
-
-<hr>
-
-<h4>📘 Algoritmos disponibles:</h4>
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Algoritmo</th>
-      <th>Longitud</th>
-      <th>Seguridad</th>
-      <th>Uso común</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>MD5</strong></td>
-      <td>128 bits</td>
-      <td>Baja (vulnerable)</td>
-      <td>Checksums y pruebas simples</td>
-    </tr>
-    <tr>
-      <td><strong>SHA-1</strong></td>
-      <td>160 bits</td>
-      <td>Media (obsoleto en seguridad)</td>
-      <td>Certificados antiguos</td>
-    </tr>
-    <tr>
-      <td><strong>SHA-256</strong></td>
-      <td>256 bits</td>
-      <td>Alta</td>
-      <td>Blockchain, SSL/TLS, JWT</td>
-    </tr>
-    <tr>
-      <td><strong>SHA-512</strong></td>
-      <td>512 bits</td>
-      <td>Muy alta</td>
-      <td>Aplicaciones de seguridad avanzada</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr>
-
-<div class="text-center">
-  <a href="{{ url_for('hash.demostracion') }}" class="btn btn-primary btn-lg">Ir a demostración</a>
+    <!-- Botón de acción -->
+    <div class="text-center">
+        <a href="{{ url_for('hash.demostracion') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            Ir a demostración práctica
+        </a>
+    </div>
 </div>
 {% endblock %}

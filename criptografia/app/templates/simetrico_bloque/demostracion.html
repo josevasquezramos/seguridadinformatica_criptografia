@@ -1,88 +1,297 @@
-{% extends 'simetrico_bloque/base.html' %}
+{% extends 'layout.html' %}
 
-{% block title %}Demostración de Cifrado en Bloque{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <article class="space-y-8">
+        <!-- Encabezado -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Demostración de Cifrado AES-256-CBC
+            </h1>
+            <p class="text-gray-600">Experimenta con el estándar de cifrado avanzado en modo CBC (Cipher Block Chaining)</p>
+        </div>
 
-{% block extra_js %}
-<script src="{{ url_for('static', filename='js/simetrico_bloque.js') }}"></script>
+        <!-- Formulario -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <form method="POST" class="space-y-6">
+                    <!-- Campo de texto -->
+                    <div>
+                        <label for="texto" class="block text-sm font-medium text-gray-700 mb-1">Texto:</label>
+                        <textarea id="texto" name="texto" rows="5"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ingresa el texto a cifrar/descifrar">{{ texto_original }}</textarea>
+                    </div>
+
+                    <!-- Campo de clave -->
+                    <div>
+                        <label for="clave" class="block text-sm font-medium text-gray-700 mb-1">
+                            Clave (32 caracteres para AES-256):
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="clave" name="clave" value="{{ clave }}"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 pr-16"
+                                placeholder="Ingresa la clave de cifrado (32 caracteres)" maxlength="32">
+                            <span id="key-char-count" class="absolute right-3 top-2 text-xs text-gray-500">0/32</span>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">La clave debe tener exactamente 32 caracteres (256 bits)</p>
+                    </div>
+
+                    <!-- Modo de operación -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Modo:</label>
+                        <div class="flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="modo" value="cifrar" {% if modo !='descifrar' %}checked{% endif %}
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <span class="ml-2 text-gray-700">Cifrar</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="modo" value="descifrar" {% if modo=='descifrar' %}checked{% endif %}
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <span class="ml-2 text-gray-700">Descifrar</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex flex-wrap gap-3">
+                        <button type="submit"
+                            class="flex-1 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Procesar
+                        </button>
+                        <button type="button" id="generar-clave"
+                            class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Generar Clave
+                        </button>
+                        <button type="button" id="limpiar"
+                            class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Limpiar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Resultados -->
+        {% if resultado %}
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Resultado</h2>
+                </div>
+
+                <div class="mb-4">
+                    <div class="p-4 bg-gray-50 rounded-md">
+                        <pre class="text-sm font-mono whitespace-pre-wrap break-all">{{ resultado }}</pre>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-500">
+                        {% if modo == 'cifrar' %}Texto cifrado (Base64 - incluye IV){% else %}Texto descifrado{% endif %}
+                    </p>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button id="copiar-resultado"
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                        Copiar
+                    </button>
+                    {% if modo == 'cifrar' %}
+                    <button id="descargar-resultado"
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Descargar
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Instrucciones -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Instrucciones</h2>
+                </div>
+                <ul class="space-y-3 text-sm text-gray-700">
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Para <strong>cifrar</strong>: Ingresa texto plano y una clave de exactamente 32 caracteres</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Para <strong>descifrar</strong>: Ingresa texto en Base64 (incluye IV) y la misma clave usada para cifrar</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>El sistema usa <strong>AES-256-CBC</strong> con padding PKCS7</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>El <strong>IV (Vector de Inicialización)</strong> se genera automáticamente y se incluye en el resultado cifrado</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Guarda la clave</strong> de forma segura, es esencial para el descifrado</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </article>
+</div>
 {% endblock %}
 
-{% block simetrico_bloque_content %}
-<article class="demo-section">
-    <h2>Demostración de Cifrado AES</h2>
-    <p class="subtitle">Experimenta con el cifrado por bloques (AES-256 en modo CBC)</p>
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Limpiar formulario
+    const limpiarBtn = document.getElementById('limpiar');
+    if (limpiarBtn) {
+        limpiarBtn.addEventListener('click', function () {
+            document.querySelector('form').reset();
+            document.getElementById('key-char-count').textContent = '0/32';
+            document.getElementById('key-char-count').classList.remove('text-green-600');
+            document.getElementById('key-char-count').classList.add('text-gray-500');
+        });
+    }
 
-    <form method="POST" class="cifrado-form">
-        <div class="form-group">
-            <label for="texto">Texto:</label>
-            <textarea id="texto" name="texto" rows="5"
-                placeholder="Ingresa el texto a cifrar/descifrar">{{ texto_original }}</textarea>
-        </div>
+    // Generador de clave automática
+    const generarClaveBtn = document.getElementById('generar-clave');
+    if (generarClaveBtn) {
+        generarClaveBtn.addEventListener('click', function () {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            let clave = '';
+            for (let i = 0; i < 32; i++) {
+                clave += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('clave').value = clave;
+            const charCount = document.getElementById('key-char-count');
+            charCount.textContent = '32/32';
+            charCount.classList.remove('text-gray-500');
+            charCount.classList.add('text-green-600');
+        });
+    }
 
-        <div class="form-group">
-            <label for="clave">Clave (32 caracteres para AES-256):</label>
-            <div class="key-input-container">
-                <input type="text" id="clave" name="clave" value="{{ clave }}"
-                    placeholder="Ingresa la clave de cifrado (32 caracteres)" class="key-input" maxlength="32">
-                <span class="key-char-count">0/32</span>
-            </div>
-            <div class="hint">La clave debe tener exactamente 32 caracteres (256 bits)</div>
-        </div>
+    // Copiar resultado
+    const copiarResultado = document.getElementById('copiar-resultado');
+    if (copiarResultado) {
+        copiarResultado.addEventListener('click', function () {
+            const resultado = document.querySelector('.text-result');
+            if (resultado) {
+                const textToCopy = document.querySelector('.bg-gray-50 pre').textContent;
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        const originalHTML = copiarResultado.innerHTML;
+                        copiarResultado.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            ¡Copiado!
+                        `;
+                        setTimeout(() => {
+                            copiarResultado.innerHTML = originalHTML;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Error al copiar: ', err);
+                    });
+            }
+        });
+    }
 
-        <div class="form-group radio-group">
-            <label>Modo:</label>
-            <div class="radio-options">
-                <label>
-                    <input type="radio" name="modo" value="cifrar" {% if modo !='descifrar' %}checked{% endif %}>
-                    <span>Cifrar</span>
-                </label>
-                <label>
-                    <input type="radio" name="modo" value="descifrar" {% if modo=='descifrar' %}checked{% endif %}>
-                    <span>Descifrar</span>
-                </label>
-            </div>
-        </div>
+    // Descargar resultado
+    const descargarResultado = document.getElementById('descargar-resultado');
+    if (descargarResultado) {
+        descargarResultado.addEventListener('click', function () {
+            const resultado = document.querySelector('.bg-gray-50 pre');
+            if (resultado) {
+                const blob = new Blob([resultado.textContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'texto_cifrado.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        });
+    }
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Procesar</button>
-            <button type="button" id="generar-clave" class="btn btn-tertiary">Generar Clave</button>
-        </div>
-    </form>
+    // Validación del formulario
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            const clave = document.getElementById('clave').value;
+            const modo = document.querySelector('input[name="modo"]:checked').value;
+            
+            if (modo === 'cifrar' && clave.length !== 32) {
+                e.preventDefault();
+                alert('Para AES-256, la clave debe tener exactamente 32 caracteres');
+                return false;
+            }
+            return true;
+        });
+    }
 
-    {% if resultado %}
-    <div class="result-section">
-        <h3>Resultado:</h3>
-        <div class="result-box">
-            {% if modo == 'cifrar' %}
-            <p class="base64-result">{{ resultado }}</p>
-            <p class="result-label">Texto cifrado (Base64 - incluye IV)</p>
-            {% else %}
-            <p class="text-result">{{ resultado }}</p>
-            <p class="result-label">Texto descifrado</p>
-            {% endif %}
-        </div>
+    // Contador de caracteres para la clave
+    const keyInput = document.getElementById('clave');
+    const charCount = document.getElementById('key-char-count');
 
-        <div class="result-actions">
-            <button id="copiar-resultado" class="btn btn-small">
-                <i class="icon-copy"></i> Copiar
-            </button>
-            {% if modo == 'cifrar' %}
-            <button id="descargar-resultado" class="btn btn-small">
-                <i class="icon-download"></i> Descargar
-            </button>
-            {% endif %}
-        </div>
-    </div>
-    {% endif %}
+    if (keyInput && charCount) {
+        // Actualizar contador
+        keyInput.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCount.textContent = `${currentLength}/32`;
+            
+            // Cambiar color
+            if (currentLength === 32) {
+                charCount.classList.remove('text-gray-500');
+                charCount.classList.add('text-green-600');
+            } else {
+                charCount.classList.remove('text-green-600');
+                charCount.classList.add('text-gray-500');
+            }
+        });
 
-    <div class="info-section">
-        <h3>Instrucciones:</h3>
-        <ul>
-            <li>Para cifrar: Ingresa texto plano y una clave de exactamente 32 caracteres</li>
-            <li>Para descifrar: Ingresa texto en Base64 (incluye IV) y la misma clave usada para cifrar</li>
-            <li>El sistema usa AES-256-CBC con padding PKCS7</li>
-            <li>El IV (Vector de Inicialización) se genera automáticamente y se incluye en el resultado cifrado</li>
-            <li>Guarda la clave de forma segura, es esencial para el descifrado</li>
-        </ul>
-    </div>
-</article>
+        // Inicializar contador si hay valor
+        if (keyInput.value) {
+            const currentLength = keyInput.value.length;
+            charCount.textContent = `${currentLength}/32`;
+            if (currentLength === 32) {
+                charCount.classList.remove('text-gray-500');
+                charCount.classList.add('text-green-600');
+            }
+        }
+    }
+});
+</script>
 {% endblock %}

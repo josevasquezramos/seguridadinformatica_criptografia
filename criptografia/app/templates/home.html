@@ -1,135 +1,251 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="home-container">
-    <h2 class="home-title">Sistemas de Criptografía</h2>
-    <p class="home-subtitle">Seleccione un módulo para explorar</p>
-
-    <div class="cards-grid">
-        <!-- Cifrado en Flujo -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Sistemas de Cifra en Flujo</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Algoritmos de cifrado que operan bit a bit con flujos de clave.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('cifra_flujo.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('cifra_flujo.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold text-blue-800 mb-8 text-center">Módulos de Criptografía</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cifra Flujo -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Cifra en Flujo</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Explora los sistemas de cifrado en flujo y sus aplicaciones.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('cifra_flujo.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('cifra_flujo.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Cifrado Simétrico en Bloque -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Cifrado Simétrico en Bloque</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Algoritmos como AES que cifran bloques de datos de tamaño fijo.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('simetrico_bloque.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('simetrico_bloque.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Simétrico Bloque -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Simétrico en Bloque</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Aprende sobre cifrado simétrico por bloques y sus algoritmos.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('simetrico_bloque.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('simetrico_bloque.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Cifrado Asimétrico con Mochilas -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Cifrado Asimétrico con Mochilas</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Sistema criptográfico basado en el problema de la mochila.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('mochila.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('mochila.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Mochila -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Cifrado Mochilas</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Descubre el cifrado asimétrico basado en el problema de la mochila.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('mochila.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('mochila.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Cifrado Asimétrico Exponencial -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Cifrado Asimétrico Exponencial</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Algoritmos basados en problemas de logaritmos discretos.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('exponencial.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('exponencial.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Exponencial -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Cifrado Exponencial</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Estudia los fundamentos del cifrado exponencial asimétrico.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('exponencial.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('exponencial.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Funciones Hash -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Funciones Hash en Criptografía</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Funciones unidireccionales para integridad de datos y firma digital.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('hash.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('hash.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Hash -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Funciones Hash</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Conoce las funciones hash y su importancia en criptografía.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('hash.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('hash.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
         <!-- Firma Digital -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Autenticación y Firma Digital</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Técnicas para verificar autenticidad e integridad de documentos.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('firma.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('firma.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Firma Digital</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Aprende sobre autenticación y firmas digitales.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('firma.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('firma.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Certificados Digitales -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Certificados Digitales</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Infraestructura de clave pública y autoridades certificadoras.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('certificados.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('certificados.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Certificados -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Certificados</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Explora el mundo de los certificados digitales.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('certificados.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('certificados.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
-        <!-- Criptografía Cuántica -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Criptografía Cuántica</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Técnicas basadas en principios de la mecánica cuántica.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('cuantica.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('cuantica.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <!-- Cuántica -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Criptografía Cuántica</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Descubre el futuro de la criptografía con la computación cuántica.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('cuantica.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('cuantica.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
 
         <!-- Blockchain -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Blockchain</h3>
-            </div>
-            <div class="card-body">
-                <p class="card-description">Tecnología de registro distribuido y criptomonedas.</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('blockchain.index') }}" class="btn btn-card">Teoría</a>
-                <a href="{{ url_for('blockchain.demostracion') }}" class="btn btn-card btn-demo">Demostración</a>
-            </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full">
+            
+                <div class="p-6 flex-grow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">Blockchain</h2>
+                </div>
+                <p class="text-gray-600 mb-4">Aprende sobre la tecnología blockchain y su criptografía.</p>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('blockchain.index') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-center transition-colors">
+                        Teoría
+                    </a>
+                    <a href="{{ url_for('blockchain.demostracion') }}" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-md text-center transition-colors">
+                        Demostración
+                    </a>
+                </div>
+                </div>
+            
         </div>
     </div>
 </div>

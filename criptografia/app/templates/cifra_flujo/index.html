@@ -1,40 +1,94 @@
-{% extends 'cifra_flujo/base.html' %}
+{% extends 'layout.html' %}
 
-{% block title %}Cifrado en Flujo{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <header class="mb-8 text-center">
+        <h2 class="text-3xl font-bold text-blue-800 mb-2">Cifrado en Flujo (Stream Cipher)</h2>
+        <p class="text-gray-600">Método de cifrado simétrico bit a bit</p>
+    </header>
 
-{% block cifra_flujo_content %}
-    <article class="intro-section">
-        <h2>Cifrado en Flujo (Stream Cipher)</h2>
-        
-        <div class="info-card">
-            <h3>¿Qué es el cifrado en flujo?</h3>
-            <p>Un cifrado en flujo es un método de cifrado simétrico donde los bits de texto plano se combinan con un flujo de bits de clave cifrada (usualmente mediante la operación XOR).</p>
-        </div>
+    <div class="grid gap-8 md:grid-cols-2">
+        <!-- Sección 1 -->
+        <section class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">¿Qué es el cifrado en flujo?</h3>
+            </div>
+            <p class="text-gray-700">Un cifrado en flujo es un método de cifrado simétrico donde los bits de texto plano se combinan con un flujo de bits de clave cifrada (usualmente mediante la operación XOR).</p>
+        </section>
 
-        <div class="info-card">
-            <h3>Características principales</h3>
-            <ul>
-                <li>Opera bit a bit o byte a byte</li>
-                <li>Generalmente más rápido que el cifrado por bloques</li>
-                <li>Requiere una clave tan larga como el mensaje (en su forma más simple)</li>
-                <li>Vulnerable si se reutiliza la clave</li>
+        <!-- Sección 2 -->
+        <section class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Características principales</h3>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>Opera bit a bit o byte a byte</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>Generalmente más rápido que el cifrado por bloques</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>Requiere una clave tan larga como el mensaje</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>Vulnerable si se reutiliza la clave</span>
+                </li>
             </ul>
-        </div>
+        </section>
 
-        <div class="action-card">
-            <h3>Prueba el cifrado en flujo</h3>
-            <p>Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado.</p>
-            <br>
-            <a href="{{ url_for('cifra_flujo.demostracion') }}" class="btn btn-primary">Ir a demostración</a>
-        </div>
+        <!-- Sección 3 - Ocupa 2 columnas -->
+        <section class="bg-white p-6 rounded-xl shadow-md border border-gray-200 md:col-span-2">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Algoritmo XOR</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-700 mb-4">Nuestra implementación utiliza el operador XOR (OR exclusivo) para combinar el texto con la clave:</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200">
+                        <pre class="text-sm font-mono text-gray-800">texto_cifrado = texto_plano XOR clave</pre>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-gray-700 mb-4">Para descifrar se aplica la misma operación:</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200">
+                        <pre class="text-sm font-mono text-gray-800">texto_plano = texto_cifrado XOR clave</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="algorithm-card">
-            <h3>Algoritmo XOR</h3>
-            <p>Nuestra implementación utiliza el operador XOR (OR exclusivo) para combinar el texto con la clave:</p>
-            <br>
-            <pre>texto_cifrado = texto_plano XOR clave</pre>
-            <br>
-            <pre>texto_plano = texto_cifrado XOR clave</pre>
-        </div>
-    </article>
+        <!-- Sección 4 - Llamada a la acción -->
+        <section class="bg-blue-50 p-6 rounded-xl shadow-md border border-blue-200 md:col-span-2 text-center">
+            <h3 class="text-xl font-semibold text-blue-800 mb-3">Prueba el cifrado en flujo</h3>
+            <p class="text-gray-700 mb-4">Experimenta con nuestro demostrador interactivo para entender cómo funciona este sistema de cifrado.</p>
+            <a href="{{ url_for('cifra_flujo.demostracion') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Ir a demostración interactiva
+            </a>
+        </section>
+    </div>
+</div>
 {% endblock %}

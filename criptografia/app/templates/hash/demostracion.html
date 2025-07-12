@@ -1,55 +1,122 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2>Demostración – Funciones Hash con hashlib (modo educativo)</h2>
-
-<form method="POST">
-    <div class="mb-3">
-        <label for="texto" class="form-label">Texto a procesar:</label>
-        <input type="text" name="texto" class="form-control" placeholder="Ejemplo: hola123" required value="{{ resultado.texto if resultado }}">
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            Demostración Educativa de Funciones Hash
+        </h1>
+        <p class="text-gray-600">Explora cómo funcionan los algoritmos hash criptográficos paso a paso</p>
     </div>
 
-    <div class="mb-3">
-        <label for="algoritmo" class="form-label">Selecciona el algoritmo:</label>
-        <select name="algoritmo" class="form-select" required>
-            <option value="md5" {% if resultado and resultado.algoritmo == 'MD5' %}selected{% endif %}>MD5</option>
-            <option value="sha1" {% if resultado and resultado.algoritmo == 'SHA1' %}selected{% endif %}>SHA-1</option>
-            <option value="sha256" {% if resultado and resultado.algoritmo == 'SHA256' %}selected{% endif %}>SHA-256</option>
-            <option value="sha512" {% if resultado and resultado.algoritmo == 'SHA512' %}selected{% endif %}>SHA-512</option>
-        </select>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+        <div class="p-6">
+            <form method="POST" class="space-y-4">
+                <div>
+                    <label for="texto" class="block text-sm font-medium text-gray-700 mb-1">Texto a procesar:</label>
+                    <input type="text" name="texto" id="texto" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                           placeholder="Ejemplo: hola123" required 
+                           value="{{ resultado.texto if resultado }}">
+                </div>
+
+                <div>
+                    <label for="algoritmo" class="block text-sm font-medium text-gray-700 mb-1">Selecciona el algoritmo:</label>
+                    <select name="algoritmo" id="algoritmo" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                        <option value="md5" {% if resultado and resultado.algoritmo == 'MD5' %}selected{% endif %}>MD5 (128 bits)</option>
+                        <option value="sha1" {% if resultado and resultado.algoritmo == 'SHA1' %}selected{% endif %}>SHA-1 (160 bits)</option>
+                        <option value="sha256" {% if resultado and resultado.algoritmo == 'SHA256' %}selected{% endif %}>SHA-256 (256 bits)</option>
+                        <option value="sha512" {% if resultado and resultado.algoritmo == 'SHA512' %}selected{% endif %}>SHA-512 (512 bits)</option>
+                    </select>
+                </div>
+
+                <button type="submit" 
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Calcular Hash
+                </button>
+            </form>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Calcular Hash</button>
-</form>
+    {% if resultado %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Resultado del Hash</h2>
+            </div>
 
-{% if resultado %}
-<hr>
-<h4>🔐 Resultado final</h4>
-<p><strong>Texto original:</strong> {{ resultado.texto }}</p>
-<p><strong>Algoritmo:</strong> {{ resultado.algoritmo }}</p>
-<p><strong>Hash final:</strong></p>
-<pre class="bg-light p-2">{{ resultado.hash }}</pre>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Texto original:</p>
+                    <p class="text-gray-900 font-mono">{{ resultado.texto }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Algoritmo:</p>
+                    <p class="text-gray-900">{{ resultado.algoritmo }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Hash final:</p>
+                    <pre class="p-3 bg-gray-100 rounded-md overflow-x-auto text-sm font-mono">{{ resultado.hash }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<h5 class="mt-4">🧠 Explicación del algoritmo:</h5>
-<p>{{ resultado.explicacion }}</p>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Explicación del Algoritmo</h2>
+            </div>
+            <p class="text-gray-700">{{ resultado.explicacion }}</p>
+        </div>
+    </div>
 
-<h5 class="mt-4">📊 Proceso educativo por bloques (cada 8 bytes)</h5>
-<table class="table table-bordered table-sm">
-    <thead>
-        <tr>
-            <th>Bloque (hex)</th>
-            <th>Contenido</th>
-            <th>Digest parcial</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for paso in resultado.pasos %}
-        <tr>
-            <td><code>{{ paso.bloque }}</code></td>
-            <td>{{ paso.contenido }}</td>
-            <td><code>{{ paso.digest_parcial }}</code></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Proceso Educativo por Bloques</h2>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bloque (hex)</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contenido</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Digest Parcial</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for paso in resultado.pasos %}
+                        <tr class="{% if loop.index % 2 == 0 %}bg-gray-50{% else %}bg-white{% endif %}">
+                            <td class="px-4 py-3 whitespace-nowrap text-sm font-mono text-gray-900">{{ paso.bloque }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-700">{{ paso.contenido }}</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm font-mono text-gray-900">{{ paso.digest_parcial }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
